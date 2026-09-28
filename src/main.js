@@ -1,4 +1,4 @@
-import { wedding } from './config.js?v=15';
+import { wedding } from './config.js?v=16';
 
 const icons = {
   calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/>',
@@ -98,7 +98,7 @@ document.querySelector('#app').innerHTML = `
 
     <section id="darceky" class="content-section soft-section"><div class="section-inner"><p class="eyebrow">VAŠA PRÍTOMNOSŤ JE DAROM</p><h2>Darčeky</h2>${branch}<p class="section-lead">Najväčším darom pre nás bude, že tento deň oslávite spolu s nami. Ak by ste nás chceli obdarovať aj niečím navyše, veľmi nás poteší finančný príspevok do nášho spoločného začiatku.</p></div></section>
 
-    <section id="pribeh" class="content-section paper-section"><div class="section-inner"><p class="eyebrow">DVA PRÍBEHY, JEDNA SPOLOČNÁ CESTA</p><h2>Náš príbeh</h2>${branch}<p class="section-lead">Sem čoskoro doplníme pár slov o tom, ako sa začal náš spoločný príbeh.</p></div></section>
+    <section id="pribeh" class="content-section paper-section"><div class="section-inner"><p class="eyebrow">DVA PRÍBEHY, JEDNA SPOLOČNÁ CESTA</p><h2>Náš príbeh</h2>${branch}<p class="section-lead"><a class="text-link" href="${wedding.instagram}" target="_blank" rel="noreferrer">Sledujte naše cestovateľské dobrodružstvá na Instagrame ${svg('arrow')}</a></p></div></section>
 
     <section id="galeria" class="gallery-section soft-section"><div class="section-inner"><p class="eyebrow">MIESTO NAŠEJ OSLAVY</p><h2>Zemiansky dvor</h2><p class="section-lead">Pohľad na priestory, záhradu a ubytovanie, kde oslávime náš svadobný deň.</p><div class="gallery-grid">${wedding.reception.photos.map((photo, i) => `<figure class="gallery-item"><img src="${photo.src}" alt="${escapeHTML(photo.alt)}" loading="lazy"><figcaption>${String(i + 1).padStart(2, '0')}</figcaption></figure>`).join('')}</div><p class="photo-credit">Fotografie priestorov: <a href="${wedding.reception.website}" target="_blank" rel="noreferrer">La Reunion</a></p></div></section>
 
