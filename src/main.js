@@ -1,4 +1,4 @@
-import { wedding } from './config.js?v=8';
+import { wedding } from './config.js?v=9';
 
 const icons = {
   calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/>',
@@ -21,9 +21,9 @@ const icons = {
 const svg = (name, className = '') => `<svg class="${className}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round">${icons[name]}</svg>`;
 
 const assetFolder = new URL('../assets/', import.meta.url);
-const sealUrl = new URL('sm-embossed-seal.jpeg', assetFolder).href;
+const logoUrl = new URL('sm-outline-logo-olive.svg', assetFolder).href;
 const wordmarkUrl = new URL('invite-wordmark.png', assetFolder).href;
-const wreath = `<img class="wreath-mark" src="${sealUrl}" alt="S&M v kruhovom rastlinnom venci" loading="lazy">`;
+const wreath = `<img class="wreath-mark" src="${logoUrl}" alt="S&M v rastlinnom venci" loading="lazy">`;
 
 const branch = `<svg class="leaf-divider" viewBox="0 0 220 62" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
   <path d="M14 48C66 42 113 28 205 13M44 43c-3-13-12-20-27-21 2 14 11 21 27 21Zm27-8c-2-13-10-20-24-23 1 14 9 22 24 23Zm27-7c0-13-7-21-20-26-1 14 6 22 20 26Zm28-6c2-13-3-22-15-29-4 13 1 23 15 29Zm27-4c5-12 3-22-7-32-7 12-6 23 7 32Zm-80 22c1 12 8 19 22 22-1-13-9-20-22-22Zm30-7c4 12 13 17 27 17-4-13-13-18-27-17Zm30-8c7 11 17 14 31 10-7-12-17-15-31-10Z"/>
@@ -43,12 +43,12 @@ const escapeHTML = (value = '') => String(value).replace(/[&<>"']/g, char => ({ 
 
 document.querySelector('#app').innerHTML = `
   <header class="site-header">
-    <a class="header-brand" href="#home" aria-label="Svadba Simony a Martina — úvod"><img class="header-logo" src="${sealUrl}" alt=""></a>
+    <a class="header-brand" href="#home" aria-label="Svadba Simony a Martina — úvod"><img class="header-logo" src="${logoUrl}" alt=""></a>
     <a class="header-date" href="#rsvp">${escapeHTML(wedding.dateLabel)}</a>
     <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Otvoriť navigáciu" aria-expanded="false">${svg('menu')}</button>
   </header>
   <nav class="menu-panel" id="menu-panel" aria-label="Hlavná navigácia" hidden>
-    <div class="menu-panel-top"><img class="menu-logo" src="${sealUrl}" alt="S&M"><button class="menu-close" id="menu-close" type="button" aria-label="Zavrieť navigáciu">${svg('close')}</button></div>
+    <div class="menu-panel-top"><img class="menu-logo" src="${logoUrl}" alt="S&M"><button class="menu-close" id="menu-close" type="button" aria-label="Zavrieť navigáciu">${svg('close')}</button></div>
     <div class="menu-panel-links">${menu.map(([icon, label, href]) => `<a class="menu-link" href="${href}">${svg(icon)}<span>${label}</span><b>${svg('arrow')}</b></a>`).join('')}</div>
     <a class="button button-olive menu-rsvp" href="#rsvp">Potvrdiť účasť ${svg('arrow')}</a>
   </nav>
