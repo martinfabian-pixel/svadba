@@ -220,8 +220,13 @@ button { color: inherit; }
 @media (min-width: 760px) {
   .site-header { height: 68px; }
   .invitation { min-height: min(840px, calc(100svh - 68px)); }
-  .invitation-inner { transform: scale(1.07); }
-  .invitation-inner .wreath-mark { width: 176px; height: 176px; }
+  .invitation-inner { width: min(100%, 560px); }
+  .invitation-inner .wreath-mark { width: 190px; height: 190px; }
+  .couple-names { width: min(100%, 520px); }
+  .invite-kicker { font-size: 14px; margin-bottom: 18px; }
+  .wedding-date { font-size: 24px; }
+  .wedding-place { font-size: 16px; }
+  .invitation-cta { width: min(100%, 340px); min-height: 52px; font-size: 12px; }
   .corner-leaf { width: 270px; height: 90px; }
   .corner-top-left { left: 1%; top: 9%; }
   .corner-bottom-right { right: 1%; bottom: 6%; }
