@@ -160,7 +160,8 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-const answers = { attending: 'yes', guestCount: 2, guestNames: ['', ''], lodging: 'yes', lodgingCount: 2, dietary: '', music: '', message: '' };
+const answers = { attending: '', guestCount: 1, guestNames: [''], transport: '', lodging: '', lodgingCount: 1, dietary: '', music: '', message: '' };
+const RSVP_STEP_COUNT = 6;
 let currentStep = 0;
 const stepBody = document.querySelector('#step-body');
 const stepCount = document.querySelector('#step-count');
@@ -172,12 +173,102 @@ const rsvpCard = document.querySelector('#rsvp-card');
 
 function counter(field, label) {
   const value = answers[field];
-  return `<div class="guest-counter"><button type="button" data-count="${field}" data-delta="-1" aria-label="Odobrať počet" ${value <= 1 ? 'disabled' : ''}>${svg('minus')}</button><strong>${value}</strong><button type="button" data-count="${field}" data-delta="1" aria-label="Pridať počet">${svg('plus')}</button></div><p class="counter-caption">${label}</p>`;
+  const max = field === 'guestCount' ? 12 : answers.guestCount;
+  return `<div class="guest-counter"><button type="button" data-count="${field}" data-delta="-1" aria-label="Odobrať počet" ${value <= 1 ? 'disabled' : ''}>${svg('minus')}</button><strong>${value}</strong><button type="button" data-count="${field}" data-delta="1" aria-label="Pridať počet" ${value >= max ? 'disabled' : ''}>${svg('plus')}</button></div><p class="counter-caption">${label}</p>`;
 }
 
 function showThanks() {
   rsvpCard.classList.add('is-thanks');
-  rsvpCard.innerHTML = `<div class="thanks-view">${wreath}<p class="thanks-script">Ďakujeme!</p><p class="eyebrow">VAŠA ODPOVEĎ SA ULOŽILA</p><p class="thanks-copy">Veľmi sa tešíme, že náš deň budeme môcť prežiť spolu s vami.</p><p class="local-note">Táto verzia zatiaľ ukladá RSVP v tomto zariadení.</p><a class="button button-olive" href="#home">Späť na úvod</a></div>`;
+  const copy = answers.attending === 'yes' ? 'Vašu odpoveď sme uložili. Veľmi sa tešíme, že náš deň oslávime spolu.' : 'Vašu odpoveď sme uložili. Ďakujeme, že ste nám dali vedieť.';
+  rsvpCard.innerHTML = `<div class="thanks-view">${wreath}<p class="thanks-script">Ďakujeme!</p><p class="eyebrow">VAŠA ODPOVEĎ SA ULOŽILA</p><p class="thanks-copy">${copy}</p><a class="button button-olive" href="#home">Späť na úvod</a></div>`;
+}
+
+function setRsvpFeedback(message) {
+  let feedback = stepBody.querySelector('.rsvp-feedback');
+  if (!feedback) {
+    feedback = document.createElement('p');
+    feedback.className = 'rsvp-feedback';
+    feedback.setAttribute('role', 'alert');
+    stepBody.append(feedback);
+  }
+  feedback.textContent = message;
+}
+
+function sendRsvp() {
+  const guestNames = answers.guestNames.slice(0, answers.guestCount).map(name => String(name || '').trim());
+  const missingName = guestNames.findIndex(name => !name);
+  if (missingName !== -1) {
+    setRsvpFeedback(`Prosíme, doplňte meno osoby ${missingName + 1}.`);
+    stepBody.querySelector(`[data-name-index="${missingName}"]`)?.focus();
+    return;
+  }
+  if (answers.attending === 'yes' && !answers.transport) {
+    setRsvpFeedback('Prosíme, vyberte spôsob dopravy.');
+    return;
+  }
+  if (answers.attending === 'yes' && !answers.lodging) {
+    setRsvpFeedback('Prosíme, vyberte odpoveď k ubytovaniu.');
+    return;
+  }
+  if (!wedding.rsvpEndpoint) {
+    setRsvpFeedback('Formulár sa ešte pripravuje. Skúste to, prosíme, neskôr.');
+    return;
+  }
+
+  nextButton.disabled = true;
+  nextButton.innerHTML = 'Odosielame…';
+  const frame = document.createElement('iframe');
+  frame.name = `sm-rsvp-${Date.now()}`;
+  frame.title = 'Odoslanie odpovede';
+  frame.hidden = true;
+  document.body.append(frame);
+
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = wedding.rsvpEndpoint;
+  form.target = frame.name;
+  form.hidden = true;
+  const payload = {
+    guestNames,
+    attendance: answers.attending,
+    transport: answers.transport,
+    lodging: answers.lodging,
+    lodgingCount: answers.lodgingCount,
+    dietary: answers.dietary,
+    music: answers.music,
+    message: answers.message,
+    website: '',
+  };
+  const field = document.createElement('input');
+  field.type = 'hidden';
+  field.name = 'payload';
+  field.value = JSON.stringify(payload);
+  form.append(field);
+  document.body.append(form);
+
+  let settled = false;
+  const finish = (success) => {
+    if (settled) return;
+    settled = true;
+    clearTimeout(timeout);
+    window.removeEventListener('message', onMessage);
+    form.remove();
+    frame.remove();
+    if (success) {
+      showThanks();
+    } else {
+      nextButton.disabled = false;
+      renderStep();
+      setRsvpFeedback('Odpoveď sa nepodarilo uložiť. Skontrolujte pripojenie a skúste to znova.');
+    }
+  };
+  const onMessage = (event) => {
+    if (event.source !== frame.contentWindow || event.data?.type !== 'sm-wedding-rsvp') return;
+    finish(event.data.ok === true);
+  };
+  const timeout = setTimeout(() => finish(false), 25000);
+  window.addEventListener('message', onMessage);
+  form.submit();
 }
 
 function bindStepFields() {
@@ -190,44 +281,55 @@ function bindStepFields() {
   stepBody.querySelectorAll('[data-count]').forEach(button => button.addEventListener('click', () => {
     const field = button.dataset.count;
     answers[field] = Math.max(1, answers[field] + Number(button.dataset.delta));
-    if (field === 'guestCount') answers.guestNames.length = Math.max(1, answers.guestCount);
+    if (field === 'guestCount') {
+      answers.guestNames.length = answers.guestCount;
+      answers.lodgingCount = Math.min(answers.lodgingCount, answers.guestCount);
+    }
     renderStep();
   }));
 }
 
 function renderStep() {
-  stepCount.textContent = `${currentStep + 1} / 5`;
-  progressFill.style.width = `${(currentStep + 1) * 20}%`;
+  const stepTotal = answers.attending === 'no' ? 2 : RSVP_STEP_COUNT;
+  stepCount.textContent = `${currentStep + 1} / ${stepTotal}`;
+  progressFill.style.width = `${((currentStep + 1) / stepTotal) * 100}%`;
   backButton.hidden = currentStep === 0;
-  nextButton.innerHTML = currentStep === 4 ? `Odoslať odpoveď ${svg('arrow')}` : `Pokračovať ${svg('arrow')}`;
+  nextButton.disabled = false;
+  const isFinalStep = currentStep === 5 || (answers.attending === 'no' && currentStep === 1);
+  nextButton.innerHTML = isFinalStep ? `Odoslať odpoveď ${svg('arrow')}` : `Pokračovať ${svg('arrow')}`;
   if (currentStep === 0) {
     stepBody.innerHTML = `<p class="eyebrow">RADI BY SME VEDELI</p><h3 class="step-title">Prídete na<br>našu svadbu?</h3><p class="step-description">Prosíme, vyberte jednu možnosť.</p><div class="choice-list"><label class="choice-card ${answers.attending === 'yes' ? 'selected' : ''}"><input type="radio" name="attending" value="yes" data-choice ${answers.attending === 'yes' ? 'checked' : ''}><span class="choice-dot"></span><span>Áno, prídeme</span></label><label class="choice-card ${answers.attending === 'no' ? 'selected' : ''}"><input type="radio" name="attending" value="no" data-choice ${answers.attending === 'no' ? 'checked' : ''}><span class="choice-dot"></span><span>Nie, neprídeme</span></label></div>`;
   } else if (currentStep === 1) {
-    const companions = Math.max(1, answers.guestCount);
-    stepBody.innerHTML = `<p class="eyebrow">TEŠÍME SA NA KAŽDÉHO Z VÁS</p><h3 class="step-title">Koľko vás príde?</h3><p class="step-description">Prosím, uveďte celkový počet osôb, ktoré sa zúčastnia svadby.</p>${counter('guestCount', 'osoby spolu, vrátane vás')}<label class="field-label companion-label">Mená všetkých osôb</label><p class="step-description name-list-note">Uveďte meno každého, kto príde, vrátane vás.</p><div class="companion-fields">${Array.from({length: companions}, (_, i) => `<input class="form-field" type="text" maxlength="70" data-name-index="${i}" value="${escapeHTML(answers.guestNames[i] || '')}" placeholder="Meno osoby ${i + 1}" ${i === 0 ? 'aria-label="Meno osoby 1"' : `aria-label="Meno osoby ${i + 1}"`}>`).join('')}</div>`;
+    const guests = Math.max(1, answers.guestCount);
+    const heading = answers.attending === 'no' ? 'Za koho posielate odpoveď?' : 'Koľko vás príde?';
+    const description = answers.attending === 'no' ? 'Uveďte mená osôb, za ktoré nám potvrdzujete neúčasť.' : 'Prosíme, uveďte celkový počet osôb, ktoré sa zúčastnia svadby.';
+    const counterLabel = answers.attending === 'no' ? 'osoby v pozvánke' : 'osoby spolu';
+    stepBody.innerHTML = `<p class="eyebrow">TEŠÍME SA NA KAŽDÉHO Z VÁS</p><h3 class="step-title">${heading}</h3><p class="step-description">${description}</p>${counter('guestCount', counterLabel)}<label class="field-label companion-label">Mená všetkých osôb</label><p class="step-description name-list-note">Zadajte meno každej osoby samostatne.</p><div class="companion-fields">${Array.from({length: guests}, (_, i) => `<input class="form-field" type="text" maxlength="70" data-name-index="${i}" value="${escapeHTML(answers.guestNames[i] || '')}" placeholder="Meno osoby ${i + 1}" aria-label="Meno osoby ${i + 1}">`).join('')}</div>`;
   } else if (currentStep === 2) {
-    stepBody.innerHTML = `<p class="eyebrow">PRE POHODLIE NAŠICH HOSTÍ</p><h3 class="step-title">Máte záujem<br>o ubytovanie?</h3><p class="step-description">Penzión Zemiansky dvor ponúka ubytovanie priamo v Šúrovciach. Dostupnosť izieb si, prosím, overte priamo v penzióne.</p><div class="choice-list"><label class="choice-card ${answers.lodging === 'yes' ? 'selected' : ''}"><input type="radio" name="lodging" value="yes" data-choice ${answers.lodging === 'yes' ? 'checked' : ''}><span class="choice-dot"></span><span>Áno, máme záujem</span></label><label class="choice-card ${answers.lodging === 'no' ? 'selected' : ''}"><input type="radio" name="lodging" value="no" data-choice ${answers.lodging === 'no' ? 'checked' : ''}><span class="choice-dot"></span><span>Nie, nebudeme potrebovať</span></label></div>`;
+    stepBody.innerHTML = `<p class="eyebrow">CESTA NA OBRAD</p><h3 class="step-title">Ako sa k nám<br>dostanete?</h3><p class="step-description">Vyberte spôsob dopravy pre vašu skupinu. Autobus vás po oslave odvezie späť do Šúroviec.</p><div class="choice-list"><label class="choice-card ${answers.transport === 'bus' ? 'selected' : ''}"><input type="radio" name="transport" value="bus" data-choice ${answers.transport === 'bus' ? 'checked' : ''}><span class="choice-dot"></span><span>Autobus zo Šúroviec · odchod 14:15</span></label><label class="choice-card ${answers.transport === 'direct' ? 'selected' : ''}"><input type="radio" name="transport" value="direct" data-choice ${answers.transport === 'direct' ? 'checked' : ''}><span class="choice-dot"></span><span>Prídeme priamo ku kostolu</span></label></div>`;
   } else if (currentStep === 3) {
+    stepBody.innerHTML = `<p class="eyebrow">PRE POHODLIE NAŠICH HOSTÍ</p><h3 class="step-title">Máte záujem<br>o ubytovanie?</h3><p class="step-description">Penzión Zemiansky dvor ponúka ubytovanie priamo v Šúrovciach. Dostupnosť izieb si, prosím, overte priamo v penzióne.</p><div class="choice-list"><label class="choice-card ${answers.lodging === 'yes' ? 'selected' : ''}"><input type="radio" name="lodging" value="yes" data-choice ${answers.lodging === 'yes' ? 'checked' : ''}><span class="choice-dot"></span><span>Áno, máme záujem</span></label><label class="choice-card ${answers.lodging === 'no' ? 'selected' : ''}"><input type="radio" name="lodging" value="no" data-choice ${answers.lodging === 'no' ? 'checked' : ''}><span class="choice-dot"></span><span>Nie, nebudeme potrebovať</span></label></div>`;
+  } else if (currentStep === 4) {
     stepBody.innerHTML = `<p class="eyebrow">UBYTOVANIE</p><h3 class="step-title">Koľko osôb bude<br>mať záujem o ubytovanie?</h3>${counter('lodgingCount', 'osoby majú záujem o ubytovanie')}<div class="lodging-note">${svg('bed')}<p>${escapeHTML(wedding.accommodationDates)}<br>Informácie a rezervácia v sekcii Ubytovanie.</p></div>`;
   } else {
-    stepBody.innerHTML = `<p class="eyebrow">POMÔŽE NÁM TO PRI PRÍPRAVE</p><h3 class="step-title">Ďalšie informácie</h3><p class="step-description">Pomôže nám to lepšie pripraviť svadobnú hostinu.</p><label class="field-label" for="dietary">${svg('dress')} Máte nejaké alergie<br>alebo špeciálne stravovanie?</label><input class="form-field" id="dietary" name="dietary" data-text maxlength="180" value="${escapeHTML(answers.dietary)}" placeholder="Dopíšte, ak je potrebné"><label class="field-label" for="music">${svg('calendar')} Máte nejaké hudobné želanie?</label><input class="form-field" id="music" name="music" data-text maxlength="180" value="${escapeHTML(answers.music)}" placeholder="Pesnička, na ktorú si chcete zatancovať"><label class="field-label" for="message">${svg('mail')} Ešte nám chcete niečo odkázať?</label><textarea class="form-field" id="message" name="message" data-text rows="3" maxlength="500" placeholder="Odkaz pre nás">${escapeHTML(answers.message)}</textarea>`;
+    stepBody.innerHTML = `<p class="eyebrow">POMÔŽE NÁM TO PRI PRÍPRAVE</p><h3 class="step-title">Ďalšie informácie</h3><p class="step-description">Odpoveď uložíme do našej súkromnej svadobnej tabuľky a použijeme ju na prípravu svadby.</p><label class="field-label" for="dietary">${svg('dress')} Máte nejaké alergie<br>alebo špeciálne stravovanie?</label><input class="form-field" id="dietary" name="dietary" data-text maxlength="180" value="${escapeHTML(answers.dietary)}" placeholder="Dopíšte, ak je potrebné"><label class="field-label" for="music">${svg('calendar')} Máte nejaké hudobné želanie?</label><input class="form-field" id="music" name="music" data-text maxlength="180" value="${escapeHTML(answers.music)}" placeholder="Pesnička, na ktorú si chcete zatancovať"><label class="field-label" for="message">${svg('mail')} Ešte nám chcete niečo odkázať?</label><textarea class="form-field" id="message" name="message" data-text rows="3" maxlength="500" placeholder="Odkaz pre nás">${escapeHTML(answers.message)}</textarea>`;
   }
   bindStepFields();
 }
 
 backButton.addEventListener('click', () => { if (currentStep > 0) { currentStep -= 1; renderStep(); } });
 nextButton.addEventListener('click', () => {
-  if (currentStep < 4) { currentStep += 1; renderStep(); return; }
-  try {
-    const saved = JSON.parse(localStorage.getItem('sm-wedding-rsvps') || '[]');
-    saved.push({ ...answers, guestNames: [...answers.guestNames], createdAt: new Date().toISOString() });
-    localStorage.setItem('sm-wedding-rsvps', JSON.stringify(saved));
-  } catch { /* The thank-you screen remains available if local storage is disabled. */ }
-  if (wedding.contactEmail) {
-    const details = `Meno: ${wedding.names}\nÚčasť: ${answers.attending === 'yes' ? 'Áno' : 'Nie'}\nPočet hostí: ${answers.guestCount}\nMená všetkých osôb: ${answers.guestNames.filter(Boolean).join(', ') || '—'}\nUbytovanie: ${answers.lodging === 'yes' ? `${answers.lodgingCount} osoby` : 'Nie'}\nStrava: ${answers.dietary || '—'}\nHudba: ${answers.music || '—'}\nOdkaz: ${answers.message || '—'}`;
-    window.location.href = `mailto:${encodeURIComponent(wedding.contactEmail)}?subject=${encodeURIComponent(`Svadobné RSVP — ${wedding.names}`)}&body=${encodeURIComponent(details)}`;
+  if (currentStep === 0 && !answers.attending) { setRsvpFeedback('Prosíme, vyberte, či sa svadby zúčastníte.'); return; }
+  if (currentStep === 1) {
+    const missingName = answers.guestNames.slice(0, answers.guestCount).findIndex(name => !String(name || '').trim());
+    if (missingName !== -1) { setRsvpFeedback(`Prosíme, doplňte meno osoby ${missingName + 1}.`); stepBody.querySelector(`[data-name-index="${missingName}"]`)?.focus(); return; }
   }
-  showThanks();
+  if ((answers.attending === 'no' && currentStep === 1) || currentStep === 5) { sendRsvp(); return; }
+  if (currentStep === 2 && !answers.transport) { setRsvpFeedback('Prosíme, vyberte spôsob dopravy.'); return; }
+  if (currentStep === 3 && !answers.lodging) { setRsvpFeedback('Prosíme, vyberte odpoveď k ubytovaniu.'); return; }
+  if (currentStep === 3 && answers.lodging === 'no') currentStep = 5;
+  else currentStep += 1;
+  renderStep();
 });
 renderStep();
 

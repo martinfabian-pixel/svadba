@@ -47,6 +47,8 @@ export const wedding = {
   accommodationName: 'Penzión Zemiansky dvor',
   accommodationAddress: 'Krakovská 67, 919 25 Šúrovce · 9 izieb',
   accommodationInfo: 'Penzión ponúka ubytovanie priamo v areáli. Dostupnosť a rezerváciu izieb si, prosím, overte priamo v penzióne.',
-  accommodationUrl: 'https://www.penzionzemianskydvor.sk/ubytovanie/', instagram: 'https://www.instagram.com/we2traveling/',
-  contactEmail: '', // Doplňte až po výbere spôsobu prijímania RSVP odpovedí.
+  accommodationUrl: 'https://www.penzionzemianskydvor.sk/ubytovanie/',
+  instagram: 'https://www.instagram.com/we2traveling/',
+  rsvpEndpoint: 'https://script.google.com/macros/s/AKfycbxShix4rVFzPefkY7mueDXd9lfzTSfb8MqUwJwUcBmRaFjpa90GlfITuQ7C8zA4rm6osQ/exec',
+  contactEmail: '',
 };
