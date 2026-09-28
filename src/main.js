@@ -1,4 +1,4 @@
-import { wedding } from './config.js?v=16';
+import { wedding } from './config.js?v=17';
 
 const icons = {
   calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/>',
@@ -27,6 +27,13 @@ const wreath = `<img class="wreath-mark" src="${logoUrl}" alt="S&M v rastlinnom 
 
 const branch = `<svg class="leaf-divider" viewBox="0 0 220 62" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
   <path d="M14 48C66 42 113 28 205 13M44 43c-3-13-12-20-27-21 2 14 11 21 27 21Zm27-8c-2-13-10-20-24-23 1 14 9 22 24 23Zm27-7c0-13-7-21-20-26-1 14 6 22 20 26Zm28-6c2-13-3-22-15-29-4 13 1 23 15 29Zm27-4c5-12 3-22-7-32-7 12-6 23 7 32Zm-80 22c1 12 8 19 22 22-1-13-9-20-22-22Zm30-7c4 12 13 17 27 17-4-13-13-18-27-17Zm30-8c7 11 17 14 31 10-7-12-17-15-31-10Z"/>
+</svg>`;const weddingRings = `<svg class="wedding-rings" viewBox="0 0 240 100" aria-hidden="true" focusable="false">
+  <ellipse class="ring-loop ring-loop-left" cx="91" cy="55" rx="34" ry="24" transform="rotate(-27 91 55)" />
+  <ellipse class="ring-inner ring-inner-left" cx="91" cy="55" rx="28" ry="18" transform="rotate(-27 91 55)" />
+  <ellipse class="ring-loop ring-loop-right" cx="149" cy="55" rx="34" ry="24" transform="rotate(27 149 55)" />
+  <ellipse class="ring-inner ring-inner-right" cx="149" cy="55" rx="28" ry="18" transform="rotate(27 149 55)" />
+  <path class="ring-diamond" d="m149 18 8 8-8 8-8-8 8-8Z" />
+  <path class="ring-sparkle" d="M149 8v5m0 26v5m14-18h5m-38 0h5m24-10 3-3m-27 27 3-3" />
 </svg>`;
 const menu = [
   ['calendar', 'Harmonogram dňa', '#program'],
@@ -63,7 +70,7 @@ document.querySelector('#app').innerHTML = `
         <p class="invite-kicker">S radosťou vám oznamujeme,<br>že uzatvárame sviatosť manželstva</p>
         <p class="wedding-date">${escapeHTML(wedding.dateLabel)}</p>
         <p class="wedding-place">v ${escapeHTML(wedding.locationLabel)}</p>
-        <p class="wedding-gathering">${escapeHTML(wedding.gatheringTime)} · stretnutie v Šúrovciach</p>
+        <p class="wedding-gathering">${escapeHTML(wedding.gatheringTime)} · stretnutie v Šúrovciach</p>        ${weddingRings}
         <a class="button button-olive invitation-cta" href="#rsvp">Potvrdiť účasť ${svg('arrow')}</a>
       </div>
     </section>
@@ -124,8 +131,25 @@ menuToggle.addEventListener('click', () => {
   menuToggle.setAttribute('aria-label', open ? 'Zavrieť navigáciu' : 'Otvoriť navigáciu');
   menuToggle.innerHTML = svg(open ? 'close' : 'menu');
 });
-document.querySelector('#menu-close').addEventListener('click', closeMenu);
-menuPanel.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+document.querySelector('#menu-close').addEventListener('click', closeMenu);menuPanel.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+
+const revealTargets = document.querySelectorAll('.countdown-section, .rsvp-section, .content-section, .place-section, .venue-section, .gallery-section, .gallery-item, .venue-strip img');
+if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -28px 0px' });
+  revealTargets.forEach((element, index) => {
+    element.classList.add('reveal-on-scroll');
+    if (element.matches('.gallery-item, .venue-strip img')) element.style.setProperty('--reveal-delay', `${(index % 4) * 90}ms`);
+    revealObserver.observe(element);
+  });
+} else {
+  revealTargets.forEach(element => element.classList.add('is-visible'));
+}
 
 const countdownTarget = new Date(wedding.date).getTime();
 function updateCountdown() {
