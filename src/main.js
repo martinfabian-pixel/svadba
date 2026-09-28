@@ -1,4 +1,4 @@
-import { wedding } from './config.js?v=5';
+import { wedding } from './config.js?v=8';
 
 const icons = {
   calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/>',
@@ -20,16 +20,10 @@ const icons = {
 };
 const svg = (name, className = '') => `<svg class="${className}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round">${icons[name]}</svg>`;
 
-const wreath = `<svg class="wreath-mark" viewBox="0 0 220 220" role="img" aria-label="Monogram S a M vo venci">
-  <circle cx="110" cy="110" r="101" fill="none" stroke="currentColor" stroke-width=".8" opacity=".42"/>
-  <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M103 183C48 161 29 112 40 69c6-24 20-39 42-52M117 183c55-22 74-71 63-114-6-24-20-39-42-52"/>
-    <path d="M57 137c-20-4-31-15-34-34 20 2 31 13 34 34Zm-8-37C30 92 23 78 29 60c17 7 24 20 20 40Zm8-36C43 51 41 36 48 20c14 11 18 26 9 44Zm24-27C69 22 72 9 84 0c9 14 8 27-3 37Zm82 100c20-4 31-15 34-34-20 2-31 13-34 34Zm8-37c19-8 26-22 20-40-17 7-24 20-20 40Zm-8-36c14-13 16-28 9-44-14 11-18 26-9 44Zm-24-27c12-22 9-35-3-44-9 14-8 27 3 44Z"/>
-  </g>
-  <text x="110" y="94" text-anchor="middle" fill="currentColor" font-family="'Cormorant Garamond', Georgia, serif" font-size="47" font-weight="400">S</text>
-  <path d="M88 109h44" stroke="currentColor" stroke-width=".8" opacity=".7"/>
-  <text x="110" y="160" text-anchor="middle" fill="currentColor" font-family="'Cormorant Garamond', Georgia, serif" font-size="47" font-weight="400">M</text>
-</svg>`;
+const assetFolder = new URL('../assets/', import.meta.url);
+const sealUrl = new URL('sm-embossed-seal.jpeg', assetFolder).href;
+const wordmarkUrl = new URL('invite-wordmark.png', assetFolder).href;
+const wreath = `<img class="wreath-mark" src="${sealUrl}" alt="S&M v kruhovom rastlinnom venci" loading="lazy">`;
 
 const branch = `<svg class="leaf-divider" viewBox="0 0 220 62" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
   <path d="M14 48C66 42 113 28 205 13M44 43c-3-13-12-20-27-21 2 14 11 21 27 21Zm27-8c-2-13-10-20-24-23 1 14 9 22 24 23Zm27-7c0-13-7-21-20-26-1 14 6 22 20 26Zm28-6c2-13-3-22-15-29-4 13 1 23 15 29Zm27-4c5-12 3-22-7-32-7 12-6 23 7 32Zm-80 22c1 12 8 19 22 22-1-13-9-20-22-22Zm30-7c4 12 13 17 27 17-4-13-13-18-27-17Zm30-8c7 11 17 14 31 10-7-12-17-15-31-10Z"/>
@@ -49,12 +43,12 @@ const escapeHTML = (value = '') => String(value).replace(/[&<>"']/g, char => ({ 
 
 document.querySelector('#app').innerHTML = `
   <header class="site-header">
-    <a class="header-brand" href="#home" aria-label="Svadba Simony a Martina — úvod"><span class="header-monogram">S<span>&</span>M</span></a>
+    <a class="header-brand" href="#home" aria-label="Svadba Simony a Martina — úvod"><img class="header-logo" src="${sealUrl}" alt=""></a>
     <a class="header-date" href="#rsvp">${escapeHTML(wedding.dateLabel)}</a>
     <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Otvoriť navigáciu" aria-expanded="false">${svg('menu')}</button>
   </header>
   <nav class="menu-panel" id="menu-panel" aria-label="Hlavná navigácia" hidden>
-    <div class="menu-panel-top"><span class="menu-script">S <i>&</i> M</span><button class="menu-close" id="menu-close" type="button" aria-label="Zavrieť navigáciu">${svg('close')}</button></div>
+    <div class="menu-panel-top"><img class="menu-logo" src="${sealUrl}" alt="S&M"><button class="menu-close" id="menu-close" type="button" aria-label="Zavrieť navigáciu">${svg('close')}</button></div>
     <div class="menu-panel-links">${menu.map(([icon, label, href]) => `<a class="menu-link" href="${href}">${svg(icon)}<span>${label}</span><b>${svg('arrow')}</b></a>`).join('')}</div>
     <a class="button button-olive menu-rsvp" href="#rsvp">Potvrdiť účasť ${svg('arrow')}</a>
   </nav>
@@ -63,7 +57,7 @@ document.querySelector('#app').innerHTML = `
       <span class="corner-leaf corner-top-left">${branch}</span><span class="corner-leaf corner-bottom-right">${branch}</span>
       <div class="invitation-inner">
         ${wreath}
-        <h1 class="couple-names"><span>${escapeHTML(wedding.nameFirst)}</span><i>a</i><span>${escapeHTML(wedding.nameSecond)}</span></h1>
+        <h1 class="couple-names" aria-label="${escapeHTML(wedding.names)}"><span class="visually-hidden">${escapeHTML(wedding.names)}</span><span class="couple-wordmark" aria-hidden="true" style="--wordmark-image: url('${wordmarkUrl}')"></span></h1>
         ${branch}
         <p class="invite-kicker">S radosťou vám oznamujeme,<br>že uzatvárame sviatosť manželstva</p>
         <p class="wedding-date">${escapeHTML(wedding.dateLabel)}</p>
@@ -106,7 +100,7 @@ document.querySelector('#app').innerHTML = `
 
     <section id="kontakt" class="content-section paper-section"><div class="section-inner"><p class="eyebrow">BUDEME RADI, KEĎ SA OZVETE</p><h2>Kontakt</h2>${branch}<p class="section-lead">Ak máte otázky, dajte nám vedieť. Kontaktné údaje doplníme.</p>${wedding.contactEmail ? `<a class="text-link" href="mailto:${escapeHTML(wedding.contactEmail)}">${escapeHTML(wedding.contactEmail)} ${svg('arrow')}</a>` : '<span class="contact-placeholder">Kontaktný e-mail doplníme.</span>'}</div></section>
 
-    <footer class="site-footer paper-section"><div>${wreath}<p class="footer-script">S <i>&</i> M</p><p>Tešíme sa na vás<br>${escapeHTML(wedding.dateLabel)} v ${escapeHTML(wedding.locationShortLocative || 'Trnave')}</p><a class="text-link" href="#home">Späť na úvod ↑</a></div><small>VYTVORENÉ S LÁSKOU</small></footer>
+    <footer class="site-footer paper-section"><div>${wreath}<p>Tešíme sa na vás<br>${escapeHTML(wedding.dateLabel)} v ${escapeHTML(wedding.locationShortLocative || 'Trnave')}</p><a class="text-link" href="#home">Späť na úvod ↑</a></div><small>VYTVORENÉ S LÁSKOU</small></footer>
   </main>
   <button id="install-button" class="install-button" type="button" hidden>Nainštalovať aplikáciu</button>
 `;
