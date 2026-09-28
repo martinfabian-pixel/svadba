@@ -1,4 +1,4 @@
-const CACHE = 'sm-wedding-v29';
+const CACHE = 'sm-wedding-v30';
 const BASE = new URL('.', self.registration.scope);
 const INDEX = new URL('index.html', BASE).pathname;
 const CORE = ['index.html', 'manifest.webmanifest', 'icons/icon.svg', 'assets/sm-logo-transparent.png', 'assets/invite-wordmark.png', 'src/main.js', 'src/config.js', 'src/style.css'].map(path => new URL(path, BASE).pathname);
