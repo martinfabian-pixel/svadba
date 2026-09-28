@@ -45,7 +45,7 @@ button { color: inherit; }
 .soft-section { background: #eeeee6; }
 .eyebrow { color: var(--olive-dark); font-size: 9px; line-height: 1.7; letter-spacing: .2em; text-transform: uppercase; margin: 0 0 13px; }
 .leaf-divider { display: block; color: #87917b; width: 148px; height: 42px; margin: 19px auto; opacity: .8; }
-.wreath-mark { display: block; width: 112px; height: 112px; object-fit: contain; }
+.wreath-mark { display: block; width: 112px; height: 112px; object-fit: contain; mix-blend-mode: multiply; }
 
 .site-header {
   height: 60px;
