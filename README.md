@@ -1,6 +1,6 @@
 # S&M Wedding
 
-Mobilná svadobná webová stránka Simony a Martina v krémovom papierovom štýle s olivovými akcentmi, botanickým monogramom, kaligrafickými menami a päťkrokovým RSVP formulárom.
+Mobilná svadobná webová stránka Simony a Martina v krémovom papierovom štýle. Používa pečať S&M z pozvánky, kaligrafický nápis s menami a krokový RSVP formulár.
 
 ## Zverejnenie cez GitHub Pages
 
@@ -10,8 +10,12 @@ https://martinfabian-pixel.github.io/svadba/
 
 ## Úprava obsahu
 
-Všetky ľahko meniteľné údaje sú v `src/config.js`: mená, dátum, miesto obradu, adresy, časy, kontaktný e-mail a fotografie. Niektoré adresy a detaily sú zatiaľ označené na doplnenie.
+Všetky ľahko meniteľné údaje sú v `src/config.js`: mená, dátum, miesto obradu, adresy, časy a fotografie. Grafické súbory z pozvánky sú v `assets/`.
 
 ## RSVP
 
-Formulár sa zobrazí a dá sa vyplniť, ale aktuálne odpoveď uloží len v prehliadači hosťa. Na spoločný zber odpovedí treba neskôr pripojiť formulár k e-mailovej alebo formulárovej službe. Fotografie sú zatiaľ ilustračné.
+Prijímací skript je v `backend/Code.gs` a zapisuje do súkromnej tabuľky `S&M Wedding — RSVP odpovede`, hárok `Odpovede`. Je vytvorený cez **Rozšírenia → Apps Script** priamo z tejto tabuľky; anotácia `@OnlyCurrentDoc` obmedzuje jeho prístup iba na ňu. Adresa nasadenej webovej aplikácie je nastavená v `src/config.js`. Formulár zobrazí potvrdenie až po úspešnom uložení odpovede.
+
+Formulár vytvorí jeden riadok pre každú pomenovanú osobu a uloží účasť, dopravu autobusom zo Šúroviec o 14:15 alebo príchod priamo ku kostolu, cestu autobusom späť, ubytovanie, stravovacie potreby, hudobné želanie a poznámku. Ostatné odpovede skupiny sa opakujú pri každom jej mene. Verejný prijímač prijíma iba nové odpovede; obsah tabuľky hosťom nesprístupňuje. Nasadenie spúšťa skript pod účtom vlastníka, hostia sa prihlasovať nemusia.
+
+Fotografie sú zatiaľ ilustračné.
