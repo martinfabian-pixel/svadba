@@ -26,6 +26,7 @@ export const wedding = {
     address: 'Františkánska 1, 917 01 Trnava',
     time: '15:00',
     maps: 'https://maps.google.com/?q=Kostol+sv.+Jakuba,+Franti%C5%A1k%C3%A1nska+1,+Trnava',
+    parkingMaps: 'https://maps.app.goo.gl/ciaJPLoRWqoJTocd8',
     website: 'https://frantiskani.sk/trnava/',
     photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Kostol_sv%C3%A4t%C3%A9ho_Jakuba_-_panoramio_%283%29.jpg/960px-Kostol_sv%C3%A4t%C3%A9ho_Jakuba_-_panoramio_%283%29.jpg',
     photoAlt: 'Františkánsky Kostol sv. Jakuba v Trnave, pohľad z mestskej veže',
