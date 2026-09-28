@@ -9,5 +9,6 @@
   "orientation": "portrait",
   "background_color": "#f5f2eb",
   "theme_color": "#f5f2eb",
-  "icons": [{ "src": "./icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+  "icons": [{ "src": "./assets/sm-logo.jpg", "sizes": "1254x1254", "type": "image/jpeg", "purpose": "any" }]
 }
+
