@@ -317,3 +317,28 @@ button { color: inherit; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; }
 }
+
+
+.menu-panel:not([hidden]) { animation: menu-arrive .32s ease both; }
+.invitation-inner { animation: invitation-arrive .9s cubic-bezier(.2,.7,.25,1) both; }
+.wedding-rings { display: block; width: 116px; height: 53px; margin: 12px auto -2px; overflow: visible; animation: rings-float 5.8s ease-in-out infinite; }
+.ring-loop, .ring-inner { fill: none; stroke-linecap: round; }
+.ring-loop { stroke: var(--olive-dark); stroke-width: 3; }
+.ring-inner { stroke: #a99f82; stroke-width: 1; opacity: .82; }
+.ring-diamond { fill: var(--paper-light); stroke: #a99f82; stroke-width: 1.5; stroke-linejoin: round; }
+.ring-sparkle { fill: none; stroke: #a99f82; stroke-width: 1.15; stroke-linecap: round; animation: ring-glimmer 3.8s ease-in-out infinite; }
+.reveal-on-scroll { --reveal-delay: 0ms; }
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-on-scroll { opacity: 0; transform: translateY(18px); transition: opacity .72s ease var(--reveal-delay), transform .72s cubic-bezier(.2,.7,.25,1) var(--reveal-delay); }
+  .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+}
+@keyframes invitation-arrive { from { opacity: 0; transform: translateY(13px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes rings-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes ring-glimmer { 0%, 65%, 100% { opacity: .32; } 76%, 84% { opacity: .95; } }
+@keyframes menu-arrive { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 520px) { .wedding-rings { width: 100px; height: 46px; margin-top: 10px; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
+  .reveal-on-scroll { opacity: 1; transform: none; }
+}
