@@ -352,3 +352,7 @@ button { color: inherit; }
 @keyframes wedding-rings-drift { 0%, 100% { transform: translate(-50%, -50%) rotate(-2deg); } 50% { transform: translate(calc(-50% + 10px), calc(-50% - 6px)) rotate(2deg); } }
 @media (max-width: 520px) { #home::before { width: min(92vw, 360px); opacity: .11; } }
 @media (prefers-reduced-motion: reduce) { #home::before { animation: none; } }
+
+#home .wedding-rings { display: none !important; }
+
+#home::before { content: none !important; display: none !important; background: none !important; animation: none !important; }
