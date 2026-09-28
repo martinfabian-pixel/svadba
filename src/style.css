@@ -342,3 +342,13 @@ button { color: inherit; }
   *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
   .reveal-on-scroll { opacity: 1; transform: none; }
 }
+
+
+/* Gold wedding bands, quietly drifting behind the invitation. */
+#home { isolation: isolate; }
+#home::before { content: ''; position: absolute; z-index: 0; top: 51%; left: 50%; width: min(84vw, 400px); aspect-ratio: 440 / 260; pointer-events: none; opacity: .13; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 440 260'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23a77d3d'/%3E%3Cstop offset='.24' stop-color='%23eddbb1'/%3E%3Cstop offset='.48' stop-color='%23b89052'/%3E%3Cstop offset='.7' stop-color='%23f1e3c1'/%3E%3Cstop offset='1' stop-color='%23a77d3d'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cellipse cx='166' cy='132' rx='112' ry='66' fill='none' stroke='url(%23g)' stroke-width='19' transform='rotate(-32 166 132)'/%3E%3Cellipse cx='274' cy='132' rx='112' ry='66' fill='none' stroke='url(%23g)' stroke-width='19' transform='rotate(32 274 132)'/%3E%3Cellipse cx='166' cy='132' rx='112' ry='66' fill='none' stroke='%23fff9eb' stroke-width='1.4' opacity='.62' transform='rotate(-32 166 132)'/%3E%3Cellipse cx='274' cy='132' rx='112' ry='66' fill='none' stroke='%23fff9eb' stroke-width='1.4' opacity='.62' transform='rotate(32 274 132)'/%3E%3C/svg%3E") center / contain no-repeat; animation: wedding-rings-drift 28s ease-in-out infinite; }
+#home .invitation-inner { position: relative; z-index: 1; }
+#home .wedding-rings { display: none !important; }
+@keyframes wedding-rings-drift { 0%, 100% { transform: translate(-50%, -50%) rotate(-2deg); } 50% { transform: translate(calc(-50% + 10px), calc(-50% - 6px)) rotate(2deg); } }
+@media (max-width: 520px) { #home::before { width: min(92vw, 360px); opacity: .11; } }
+@media (prefers-reduced-motion: reduce) { #home::before { animation: none; } }
