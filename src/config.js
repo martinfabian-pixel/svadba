@@ -23,11 +23,14 @@ export const wedding = {
   gatheringPlace: 'Šúrovce · miesto nástupu na autobus doplníme',
   ceremony: {
     name: 'Kostol sv. Jakuba',
-    address: 'Námestie sv. Mikuláša, 917 01 Trnava',
+    address: 'Františkánska 1, 917 01 Trnava',
     time: '15:00',
-    maps: 'https://maps.google.com/?q=Kostol+sv.+Jakuba,+Trnava',
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Kostol_sv._Jakuba_star%C5%A1ieho.jpg/960px-Kostol_sv._Jakuba_star%C5%A1ieho.jpg',
-    photoCreditUrl: 'https://commons.wikimedia.org/wiki/File:Kostol_sv._Jakuba_star%C5%A1ieho.jpg',
+    maps: 'https://maps.google.com/?q=Kostol+sv.+Jakuba,+Franti%C5%A1k%C3%A1nska+1,+Trnava',
+    website: 'https://frantiskani.sk/trnava/',
+    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Kostol_sv%C3%A4t%C3%A9ho_Jakuba_-_panoramio_%283%29.jpg/960px-Kostol_sv%C3%A4t%C3%A9ho_Jakuba_-_panoramio_%283%29.jpg',
+    photoAlt: 'Františkánsky Kostol sv. Jakuba v Trnave, pohľad z mestskej veže',
+    photoCreditUrl: 'https://commons.wikimedia.org/wiki/File:Kostol_sv%C3%A4t%C3%A9ho_Jakuba_-_panoramio_(3).jpg',
+    photoLicenseUrl: 'https://creativecommons.org/licenses/by/3.0/',
   },
   reception: {
     name: 'Penzión Zemiansky dvor',
