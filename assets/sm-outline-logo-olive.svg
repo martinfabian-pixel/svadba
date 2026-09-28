@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="S&amp;M v rastlinnom venci">
+  <g fill="none" stroke="#78816b" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="120" cy="120" r="112" stroke-width="1.6"/>
+    <circle cx="120" cy="120" r="106" stroke-width="1.1"/>
+    <g stroke-width="2">
+      <path d="M113 194C79 178 53 150 45 119 36 85 50 54 78 34"/>
+      <path d="M127 194C161 178 187 150 195 119 204 85 190 54 162 34"/>
+      <path d="M67 160C51 163 39 155 32 140c16-3 29 4 35 20Zm-14-28c-16-1-26-11-30-27 16 0 28 9 30 27Zm-7-32C31 93 24 81 27 64c15 5 23 17 19 36Zm8-30C43 58 42 44 51 29c12 9 16 23 3 41Z"/>
+      <path d="M173 160c16 3 28-5 35-20-16-3-29 4-35 20Zm14-28c16-1 26-11 30-27-16 0-28 9-30 27Zm7-32c15-7 22-19 19-36-15 5-23 17-19 36Zm-8-30c11-12 12-26 3-41-12 9-16 23-3 41Z"/>
+      <path d="M79 173c-1-15 7-25 22-30 2 15-6 27-22 30Zm82 0c1-15-7-25-22-30-2 15 6 27 22 30ZM60 148c-2-15 5-26 19-32 4 15-2 27-19 32Zm120 0c2-15-5-26-19-32-4 15 2 27 19 32Z"/>
+      <path d="M120 198c-10-8-15-14-15-20 0-8 10-11 15-3 5-8 15-5 15 3 0 6-5 12-15 20Z"/>
+    </g>
+    <text x="120" y="128" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="45" font-weight="400" letter-spacing="1" stroke-width="1.7">S&amp;M</text>
+  </g>
+</svg>
