@@ -1,0 +1,13 @@
+{
+  "name": "S&M Wedding — Simona a Martin",
+  "short_name": "S&M Wedding",
+  "description": "Svadobný sprievodca pre Simonu a Martina.",
+  "lang": "sk",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f2eb",
+  "theme_color": "#f5f2eb",
+  "icons": [{ "src": "./icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
