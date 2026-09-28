@@ -9,7 +9,7 @@
   --muted: #77776d;
   --rule: #d8d4ca;
   --serif: 'Cormorant Garamond', Georgia, serif;
-  --script: 'Great Vibes', 'Brush Script MT', cursive;
+  --script: 'Allura', 'Brush Script MT', cursive;
   --sans: 'DM Sans', Arial, sans-serif;
   font-family: var(--sans);
   color: var(--ink);
@@ -45,7 +45,7 @@ button { color: inherit; }
 .soft-section { background: #eeeee6; }
 .eyebrow { color: var(--olive-dark); font-size: 9px; line-height: 1.7; letter-spacing: .2em; text-transform: uppercase; margin: 0 0 13px; }
 .leaf-divider { display: block; color: #87917b; width: 148px; height: 42px; margin: 19px auto; opacity: .8; }
-.wreath-mark { display: block; color: var(--olive); width: 112px; height: 112px; }
+.wreath-mark { display: block; color: var(--olive); width: 112px; height: 112px; object-fit: cover; border-radius: 50%; mix-blend-mode: multiply; opacity: .88; }
 
 .site-header {
   height: 60px;
@@ -58,8 +58,7 @@ button { color: inherit; }
   z-index: 25;
 }
 .header-brand { display: inline-flex; align-items: center; }
-.header-monogram { color: var(--olive-dark); font: 400 21px var(--serif); letter-spacing: .1em; }
-.header-monogram span { font-size: 14px; font-style: italic; margin: 0 2px; }
+.header-logo { width: 39px; height: 39px; object-fit: cover; border-radius: 50%; mix-blend-mode: multiply; opacity: .88; }
 .header-date { justify-self: center; font: 500 12px var(--serif); letter-spacing: .12em; text-transform: uppercase; }
 .menu-toggle, .menu-close, .step-back { border: 0; background: transparent; cursor: pointer; display: grid; place-items: center; }
 .menu-toggle { justify-self: end; width: 38px; height: 38px; color: var(--olive-dark); }
@@ -74,8 +73,7 @@ button { color: inherit; }
   background: rgba(248,246,240,.985);
 }
 .menu-panel-top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 17px; border-bottom: 1px solid var(--rule); }
-.menu-script { color: var(--olive-dark); font: 34px var(--script); }
-.menu-script i { font-size: 24px; }
+.menu-logo { width: 68px; height: 68px; object-fit: cover; border-radius: 50%; mix-blend-mode: multiply; opacity: .88; }
 .menu-close { width: 40px; height: 40px; color: var(--olive-dark); }
 .menu-panel-links { margin: 16px 0 20px; }
 .menu-link { min-height: 48px; display: grid; grid-template-columns: 24px 1fr 18px; gap: 12px; align-items: center; border-bottom: 1px solid rgba(115,121,101,.16); font: 500 16px var(--serif); }
@@ -87,8 +85,9 @@ button { color: inherit; }
 .invitation { min-height: calc(100svh - 60px); position: relative; display: grid; place-items: center; overflow: hidden; padding: 26px 20px 34px; }
 .invitation-inner { width: min(100%, 420px); text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
 .invitation-inner .wreath-mark { width: 126px; height: 126px; margin-bottom: 9px; }
-.couple-names { margin: 0; color: #33372e; display: flex; flex-direction: column; align-items: center; font: 400 clamp(39px, 11vw, 54px)/.88 var(--script); }
-.couple-names i { font: 400 19px var(--serif); color: var(--olive-dark); margin: 3px 0 1px; }
+.couple-names { margin: 0; width: min(100%, 420px); font-size: 0; line-height: 0; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.couple-wordmark { display: block; width: 100%; aspect-ratio: 3 / 1; background-image: var(--wordmark-image); background-repeat: no-repeat; background-size: 123.8% auto; background-position: 61.4% 41.8%; mix-blend-mode: multiply; }
 .invitation-inner .leaf-divider { margin: 13px auto 10px; width: 132px; height: 37px; }
 .invite-kicker { margin: 1px 0 16px; font: 500 12px/1.65 var(--serif); letter-spacing: .17em; text-transform: uppercase; }
 .wedding-date { margin: 0 0 8px; font: 500 20px var(--serif); letter-spacing: .22em; text-transform: uppercase; }
@@ -212,9 +211,7 @@ button { color: inherit; }
 .site-footer { padding: 32px 20px 22px; text-align: center; border-top: 1px solid rgba(120,129,107,.18); }
 .site-footer>div { width: min(100%, 270px); margin: auto; }
 .site-footer .wreath-mark { width: 78px; height: 78px; margin: auto; }
-.footer-script { margin: 1px 0 7px; color: var(--olive-dark); font: 35px var(--script); }
-.footer-script i { font: italic 17px var(--serif); }
-.site-footer>div>p:not(.footer-script) { color: var(--muted); font: 400 14px/1.45 var(--serif); }
+.site-footer>div>p { color: var(--muted); font: 400 14px/1.45 var(--serif); }
 .site-footer small { display: block; margin-top: 26px; color: #87877c; font-size: 8px; letter-spacing: .18em; }
 .install-button { position: fixed; right: 14px; bottom: 15px; z-index: 20; padding: 11px 14px; border: 1px solid var(--olive); border-radius: 25px; background: var(--paper-light); color: var(--olive-dark); box-shadow: 0 4px 18px rgba(42,45,35,.11); font: 500 11px var(--sans); cursor: pointer; }
 .install-button[hidden] { display: none; }
@@ -224,7 +221,6 @@ button { color: inherit; }
   .invitation { min-height: min(840px, calc(100svh - 68px)); }
   .invitation-inner { transform: scale(1.07); }
   .invitation-inner .wreath-mark { width: 145px; height: 145px; }
-  .couple-names { font-size: 58px; }
   .corner-leaf { width: 270px; height: 90px; }
   .corner-top-left { left: 1%; top: 9%; }
   .corner-bottom-right { right: 1%; bottom: 6%; }
@@ -239,12 +235,10 @@ button { color: inherit; }
 @media (max-width: 520px) {
   html { scroll-padding-top: 58px; }
   .site-header { height: 56px; padding: 0 18px; }
-  .header-monogram { font-size: 19px; }
   .header-date { font-size: 10px; letter-spacing: .08em; }
   .menu-toggle { width: 34px; }
   .invitation { min-height: calc(100svh - 56px); padding: 22px 18px 29px; }
   .invitation-inner .wreath-mark { width: 112px; height: 112px; }
-  .couple-names { font-size: clamp(40px, 11vw, 48px); }
   .invite-kicker { font-size: 10px; }
   .wedding-date { font-size: 18px; }
   .wedding-place { font-size: 12px; }
@@ -281,7 +275,6 @@ button { color: inherit; }
 
 @media (max-width: 360px) {
   .header-date { font-size: 9px; }
-  .couple-names { font-size: 38px; }
   .rsvp-card { padding-inline: 12px; }
   .progress-track { width: 76px; }
   .guest-counter { gap: 17px; }
