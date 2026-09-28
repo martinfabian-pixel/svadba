@@ -21,7 +21,7 @@ const icons = {
 const svg = (name, className = '') => `<svg class="${className}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round">${icons[name]}</svg>`;
 
 const assetFolder = new URL('../assets/', import.meta.url);
-const logoUrl = new URL('sm-logo.jpg', assetFolder).href;
+const logoUrl = new URL('sm-logo-transparent.png', assetFolder).href;
 const wordmarkUrl = new URL('invite-wordmark.png', assetFolder).href;
 const wreath = `<img class="wreath-mark" src="${logoUrl}" alt="S&M v rastlinnom venci" loading="lazy">`;
 
