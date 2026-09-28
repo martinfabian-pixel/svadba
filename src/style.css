@@ -156,7 +156,7 @@ button { color: inherit; }
 .counter-caption { text-align: center; color: var(--muted); font: 400 12px var(--serif); margin: 0 0 17px; }
 .field-label { display: flex; align-items: center; gap: 8px; color: #44463e; font: 400 13px/1.35 var(--serif); margin: 14px 0 8px; }
 .field-label svg { width: 17px; height: 17px; flex: 0 0 17px; color: var(--olive-dark); }
-.companion-label { margin: 18px 0 8px; }
+.companion-label { margin: 18px 0 8px; } .name-list-note { max-width: none; margin: 0 0 8px; text-align: left; font-size: 12px; }
 .companion-fields { display: grid; gap: 8px; }
 .form-field { width: 100%; border: 1px solid #d7d3c9; border-radius: 6px; background: rgba(255,255,255,.4); min-height: 40px; padding: 9px 12px; color: var(--ink); font: 400 14px var(--serif); outline: none; resize: vertical; }
 .form-field:focus { border-color: var(--olive); box-shadow: 0 0 0 2px rgba(120,129,107,.12); }
