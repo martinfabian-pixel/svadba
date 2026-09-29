@@ -49,6 +49,6 @@ export const wedding = {
   accommodationInfo: 'Penzión ponúka ubytovanie priamo v areáli. Dostupnosť a rezerváciu izieb si, prosím, overte priamo v penzióne.',
   accommodationUrl: 'https://www.penzionzemianskydvor.sk/ubytovanie/',
   instagram: 'https://www.instagram.com/we2traveling/',
-  rsvpEndpoint: 'https://script.google.com/macros/s/AKfycbxShix4rVFzPefkY7mueDXd9lfzTSfb8MqUwJwUcBmRaFjpa90GlfITuQ7C8zA4rm6osQ/exec',
+  rsvpEndpoint: 'https://script.google.com/macros/s/AKfycbw1rK7Ihb3XUxz0ab5tx9l3Le5j0V8xbl72BRsg_dRdHGy6Z0PCzWhZzRyagxTa3KGrlg/exec',
   contactEmail: '',
 };
