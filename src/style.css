@@ -83,7 +83,7 @@ button { color: inherit; }
 .menu-link b svg { width: 15px; }
 .menu-rsvp { width: 100%; }
 
-.invitation { min-height: .invitation {
+.invitation {
   min-height: calc(100svh - 60px);
   position: relative;
   display: grid;
