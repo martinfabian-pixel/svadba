@@ -515,3 +515,42 @@ button { color: inherit; }
     transform: translateY(0);
   }
 }
+/* HERO ENTRANCE */
+@media (prefers-reduced-motion: no-preference) {
+  #home .wreath-mark {
+    animation:
+      hero-logo-arrive 1.2s cubic-bezier(.2,.7,.2,1) both,
+      hero-logo-breathe 7s ease-in-out 1.3s infinite;
+  }
+
+  #home .couple-wordmark {
+    animation: hero-names-arrive .9s cubic-bezier(.2,.7,.25,1) .45s both;
+  }
+
+  @keyframes hero-logo-arrive {
+    from {
+      opacity: 0;
+      transform: scale(1.08) translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes hero-logo-breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.012); }
+  }
+
+  @keyframes hero-names-arrive {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
