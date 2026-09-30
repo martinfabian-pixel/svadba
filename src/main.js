@@ -121,7 +121,34 @@ document.querySelector('#app').innerHTML = `
 
     <section id="pribeh" class="content-section paper-section"><div class="section-inner"><p class="eyebrow">DVA PRÍBEHY, JEDNA SPOLOČNÁ CESTA</p><h2>Náš príbeh</h2>${branch}<p class="section-lead"><a class="text-link" href="${wedding.instagram}" target="_blank" rel="noreferrer">Sledujte naše cestovateľské dobrodružstvá na Instagrame ${svg('arrow')}</a></p></div></section>
 
-    <section id="galeria" class="gallery-section soft-section"><div class="section-inner"><p class="eyebrow">MIESTO NAŠEJ OSLAVY</p><h2>Zemiansky dvor</h2><p class="section-lead">Pohľad na priestory, záhradu a ubytovanie, kde oslávime náš svadobný deň.</p><div class="gallery-grid">${wedding.reception.photos.map((photo, i) => `<figure class="gallery-item"><img src="${photo.src}" alt="${escapeHTML(photo.alt)}" loading="lazy"><figcaption>${String(i + 1).padStart(2, '0')}</figcaption></figure>`).join('')}</div><p class="photo-credit">Fotografie priestorov: <a href="${wedding.reception.website}" target="_blank" rel="noreferrer">La Reunion</a></p></div></section>
+        <section id="galeria" class="content-section soft-section">
+      <div class="section-inner">
+        <p class="eyebrow">MIESTO NAŠEJ OSLAVY</p>
+        <h2>Zemiansky dvor</h2>
+        <p class="section-lead">
+          Prezrite si miesto, kde spolu oslávime náš svadobný deň.
+        </p>
+
+        <div style="width:100%; height:70vh; min-height:500px; margin-top:32px; overflow:hidden;">
+          <iframe
+            src="https://my.vpromo.sk/sk/tour/zemiansky-dvor"
+            title="3D prehliadka Zemianskeho dvora"
+            style="width:100%; height:100%; border:0;"
+            loading="lazy"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <p style="margin-top:24px;">
+          <a class="button button-outline"
+             href="https://my.vpromo.sk/sk/tour/zemiansky-dvor"
+             target="_blank"
+             rel="noreferrer">
+            Otvoriť 3D prehliadku ${svg('arrow')}
+          </a>
+        </p>
+      </div>
+    </section>
 
     <section id="kontakt" class="content-section paper-section"><div class="section-inner"><p class="eyebrow">BUDEME RADI, KEĎ SA OZVETE</p><h2>Kontakt</h2>${branch}<p class="section-lead">Ak máte otázky, dajte nám vedieť. Kontaktné údaje doplníme.</p>${wedding.contactEmail ? `<a class="text-link" href="mailto:${escapeHTML(wedding.contactEmail)}">${escapeHTML(wedding.contactEmail)} ${svg('arrow')}</a>` : '<span class="contact-placeholder">Kontaktný e-mail doplníme.</span>'}</div></section>
 
