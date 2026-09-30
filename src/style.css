@@ -84,7 +84,7 @@ button { color: inherit; }
 .menu-rsvp { width: 100%; }
 
 .invitation {
-  min-height: calc(100svh - 60px);
+  min-height: auto;
   position: relative;
   display: grid;
   place-items: start center;
