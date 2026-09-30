@@ -104,6 +104,20 @@ document.querySelector('#app').innerHTML = `
     <section id="dress-code" class="content-section paper-section"><div class="section-inner"><p class="eyebrow">SLÁVNOSTNE A S POHODLÍM</p><h2>Dress code</h2>${branch}<p class="section-lead">Zvoľte si oblečenie, v ktorom sa budete cítiť slávnostne a pohodlne. Ďalšie odporúčania doplníme.</p></div></section>
 
     <section id="darceky" class="content-section soft-section"><div class="section-inner"><p class="eyebrow">VAŠA PRÍTOMNOSŤ JE DAROM</p><h2>Darčeky</h2>${branch}<p class="section-lead">Najväčším darom pre nás bude, že tento deň oslávite spolu s nami. Ak by ste nás chceli obdarovať aj niečím navyše, veľmi nás poteší finančný príspevok do nášho spoločného začiatku.</p></div></section>
+    <section id="zasnuby" class="content-section soft-section">
+      <div class="section-inner">
+        <p class="eyebrow">NAŠE ÁNO ZAČALO VO FLORENCII</p>
+        <h2>Naše zásnuby</h2>
+        ${branch}
+        <p class="section-lead">
+          <strong>4. apríla 2026 · Florencia</strong><br><br>
+          Jeden z najkrajších momentov našej spoločnej cesty. Pozrite si, ako sa začala cesta k nášmu svadobnému dňu.
+        </p>
+        <a class="button button-outline" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE3ODU2OTYyNzQ4NjMxNTA2?story_media_id=3867776256477509653&stkn=eWY0NXozeDBmdnV1" target="_blank" rel="noreferrer">
+          Pozrieť naše zásnuby na Instagrame ${svg('arrow')}
+        </a>
+      </div>
+    </section>
 
     <section id="pribeh" class="content-section paper-section"><div class="section-inner"><p class="eyebrow">DVA PRÍBEHY, JEDNA SPOLOČNÁ CESTA</p><h2>Náš príbeh</h2>${branch}<p class="section-lead"><a class="text-link" href="${wedding.instagram}" target="_blank" rel="noreferrer">Sledujte naše cestovateľské dobrodružstvá na Instagrame ${svg('arrow')}</a></p></div></section>
 
