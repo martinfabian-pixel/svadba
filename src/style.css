@@ -463,3 +463,55 @@ button { color: inherit; }
     transform: scale(1) translateY(0);
   }
 }
+/* TEXT REVEAL */
+@media (prefers-reduced-motion: no-preference) {
+
+  .welcome-section.reveal-on-scroll .eyebrow,
+  .content-section.reveal-on-scroll .eyebrow,
+  .countdown-section.reveal-on-scroll .eyebrow,
+  .rsvp-section.reveal-on-scroll .eyebrow,
+  .place-section.reveal-on-scroll .eyebrow,
+  .venue-section.reveal-on-scroll .eyebrow {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .55s ease .12s,
+                transform .65s cubic-bezier(.2,.7,.25,1) .12s;
+  }
+
+  .welcome-section.reveal-on-scroll h2,
+  .content-section.reveal-on-scroll h2,
+  .countdown-section.reveal-on-scroll h2,
+  .rsvp-section.reveal-on-scroll h2,
+  .place-section.reveal-on-scroll h2,
+  .venue-section.reveal-on-scroll h2 {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .65s ease .22s,
+                transform .75s cubic-bezier(.2,.7,.25,1) .22s;
+  }
+
+  .welcome-section.reveal-on-scroll .welcome-copy,
+  .content-section.reveal-on-scroll .section-lead,
+  .content-section.reveal-on-scroll .section-note,
+  .place-section.reveal-on-scroll .place-name,
+  .place-section.reveal-on-scroll .place-copy > p,
+  .venue-section.reveal-on-scroll .place-name,
+  .venue-section.reveal-on-scroll .venue-description {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .7s ease .34s,
+                transform .8s cubic-bezier(.2,.7,.25,1) .34s;
+  }
+
+  .reveal-on-scroll.is-visible .eyebrow,
+  .reveal-on-scroll.is-visible h2,
+  .reveal-on-scroll.is-visible .welcome-copy,
+  .reveal-on-scroll.is-visible .section-lead,
+  .reveal-on-scroll.is-visible .section-note,
+  .reveal-on-scroll.is-visible .place-name,
+  .reveal-on-scroll.is-visible .place-copy > p,
+  .reveal-on-scroll.is-visible .venue-description {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
