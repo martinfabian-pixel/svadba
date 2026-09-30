@@ -380,3 +380,45 @@ button { color: inherit; }
 .site-footer .wreath-mark { width: 108px; height: 72px; }
 @media (min-width: 760px) { .invitation-inner .wreath-mark { width: 240px; height: 160px; } }
 @media (max-width: 520px) { .invitation-inner .wreath-mark { width: 210px; height: 140px; } }
+/* FINAL MOBILE HERO LAYOUT */
+@media (max-width: 520px) {
+  #home.invitation {
+    height: calc(100svh - 56px);
+    min-height: 0;
+    box-sizing: border-box;
+    padding: 52px 18px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  #home .invitation-inner {
+    width: min(100%, 420px);
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #home .invitation-inner .wreath-mark {
+    width: 210px;
+    height: 140px;
+    margin: 0 0 8px;
+  }
+
+  #home .invite-kicker {
+    margin-top: auto;
+    margin-bottom: 12px;
+  }
+
+  #home .wedding-date {
+    margin-top: auto;
+    margin-bottom: 8px;
+  }
+
+  #home .invitation-cta {
+    margin-top: auto;
+    margin-bottom: 0;
+  }
+}
