@@ -411,3 +411,18 @@ document.querySelector('#install-button').addEventListener('click', async () => 
   document.querySelector('#install-button').hidden = true;
 });
 if ('serviceWorker' in navigator && location.protocol !== 'file:') window.addEventListener('load', () => navigator.serviceWorker.register(new URL('../sw.js', import.meta.url)).catch(() => {}));
+/* CINEMATIC HERO SCROLL */
+const hero = document.querySelector('#home');
+const heroInner = hero?.querySelector('.invitation-inner');
+
+if (hero && heroInner && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const updateHeroScroll = () => {
+    const rect = hero.getBoundingClientRect();
+    const progress = Math.min(Math.max(-rect.top / (hero.offsetHeight * 0.7), 0), 1);
+
+    heroInner.style.setProperty('--hero-scroll', progress);
+  };
+
+  updateHeroScroll();
+  window.addEventListener('scroll', updateHeroScroll, { passive: true });
+}
