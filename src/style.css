@@ -101,7 +101,7 @@ button { color: inherit; }
   background-image: var(--wordmark-image);
   background-repeat: no-repeat;
   background-size: 123.8% auto;
-  background-position: 61.4% 42.5%;
+  background-position: 61.4% 50%;
   background-blend-mode: multiply;
 }
 .invitation-inner .leaf-divider { margin: 13px auto 10px; width: 132px; height: 37px; }
@@ -408,17 +408,17 @@ button { color: inherit; }
   }
 
   #home .invite-kicker {
-    margin-top: auto;
+    margin-top: 8px;
     margin-bottom: 12px;
   }
 
   #home .wedding-date {
-    margin-top: auto;
+    margin-top: 18px;
     margin-bottom: 8px;
   }
 
   #home .invitation-cta {
-    margin-top: auto;
+    margin-top: 22px;
     margin-bottom: 0;
   }
 }
