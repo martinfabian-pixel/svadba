@@ -422,3 +422,6 @@ button { color: inherit; }
     margin-bottom: 0;
   }
 }
+#home .couple-names {
+  margin-top: 55px;
+}
