@@ -62,11 +62,11 @@ document.querySelector('#app').innerHTML = `
   </nav>
   <main>
     <section id="home" class="invitation paper-section">
-      <span class="corner-leaf corner-top-left">${branch}</span><span class="corner-leaf corner-bottom-right">${branch}</span>
+      <span class="corner-leaf corner-top-left"></span><span class="corner-leaf corner-bottom-right"></span>
       <div class="invitation-inner">
         ${wreath}
         <h1 class="couple-names" aria-label="${escapeHTML(wedding.names)}"><span class="visually-hidden">${escapeHTML(wedding.names)}</span><span class="couple-wordmark" aria-hidden="true" style="--wordmark-image: url('${wordmarkUrl}')"></span></h1>
-        ${branch}
+        
         <p class="invite-kicker">S radosťou vám oznamujeme,<br>že uzatvárame sviatosť manželstva</p>
         <p class="wedding-date">${escapeHTML(wedding.dateLabel)}</p>
         <p class="wedding-place">v ${escapeHTML(wedding.locationLabel)}</p>
@@ -76,7 +76,7 @@ document.querySelector('#app').innerHTML = `
     </section>
 
     <section id="uvod" class="welcome-section paper-section">
-      <div class="welcome-inner">${branch}<p class="eyebrow">${escapeHTML(wedding.dateLabel)} · ${escapeHTML(wedding.locationShort)}</p><h2>Milí naši,</h2><p class="welcome-copy">tešíme sa, že tento deň budete prežívať spolu s nami. Prosíme vás o potvrdenie účasti a niekoľko informácií, ktoré nám pomôžu pripraviť náš svadobný deň.</p>${branch}<a class="button button-olive" href="#rsvp">Začať ${svg('arrow')}</a></div>
+      <div class="welcome-inner"><p class="eyebrow">${escapeHTML(wedding.dateLabel)} · ${escapeHTML(wedding.locationShort)}</p><h2>Milí naši,</h2><p class="welcome-copy">tešíme sa, že tento deň budete prežívať spolu s nami. Prosíme vás o potvrdenie účasti a niekoľko informácií, ktoré nám pomôžu pripraviť náš svadobný deň.</p><a class="button button-olive" href="#rsvp">Začať ${svg('arrow')}</a></div>
     </section>
 
     <section class="countdown-section"><div class="countdown-inner"><p class="eyebrow">UŽ SA NEVIEME DOČKAŤ</p><h2>Do nášho dňa zostáva</h2><div id="countdown" class="countdown"><div><strong>—</strong><span>Dní</span></div><i>·</i><div><strong>—</strong><span>Hodín</span></div><i>·</i><div><strong>—</strong><span>Minút</span></div><i>·</i><div><strong>—</strong><span>Sekúnd</span></div></div></div></section>
@@ -91,24 +91,24 @@ document.querySelector('#app').innerHTML = `
       </div>
     </section>
 
-    <section id="program" class="content-section paper-section"><div class="section-inner"><p class="eyebrow">TEŠÍME SA NA KAŽDÝ OKAMIH</p><h2>Harmonogram dňa</h2>${branch}<div class="schedule-list"><article><time>${escapeHTML(wedding.gatheringTime)}</time><span class="schedule-dot"></span><div><h3>Stretnutie v Šúrovciach</h3><p>${escapeHTML(wedding.gatheringPlace)}</p></div></article><article><time>${escapeHTML(wedding.ceremony.time)}</time><span class="schedule-dot"></span><div><h3>Svadobný obrad</h3><p>${escapeHTML(wedding.ceremony.name)} v Trnave</p></div></article><article><time>Po obrade</time><span class="schedule-dot"></span><div><h3>Svadobná oslava</h3><p>${escapeHTML(wedding.reception.name)} v Šúrovciach</p></div></article></div></div></section>
+    <section id="program" class="content-section paper-section"><div class="section-inner"><p class="eyebrow">TEŠÍME SA NA KAŽDÝ OKAMIH</p><h2>Harmonogram dňa</h2><div class="schedule-list"><article><time>${escapeHTML(wedding.gatheringTime)}</time><span class="schedule-dot"></span><div><h3>Stretnutie v Šúrovciach</h3><p>${escapeHTML(wedding.gatheringPlace)}</p></div></article><article><time>${escapeHTML(wedding.ceremony.time)}</time><span class="schedule-dot"></span><div><h3>Svadobný obrad</h3><p>${escapeHTML(wedding.ceremony.name)} v Trnave</p></div></article><article><time>Po obrade</time><span class="schedule-dot"></span><div><h3>Svadobná oslava</h3><p>${escapeHTML(wedding.reception.name)} v Šúrovciach</p></div></article></div></div></section>
 
         <section id="miesto" class="place-section"><img class="place-photo" src="${wedding.ceremony.photo}" alt="${escapeHTML(wedding.ceremony.photoAlt)}" loading="lazy"><div class="place-copy"><p class="eyebrow">SVADOBNÝ OBRAD · ${escapeHTML(wedding.ceremony.time)}</p><h2>Miesto obradu</h2><p class="place-name">${escapeHTML(wedding.ceremony.name)} v ${escapeHTML(wedding.locationShortLocative || 'Trnave')}</p><p>${escapeHTML(wedding.ceremony.address).replace(', ', '<br>')}</p><a class="button button-outline" href="${wedding.ceremony.maps}" target="_blank" rel="noreferrer">${svg('pin')} Zobraziť na mape</a><p><a class="text-link" href="${wedding.ceremony.parkingMaps}" target="_blank" rel="noreferrer">Parkovanie pri kostole</a></p><p class="photo-attribution">Fotografia: <a href="${wedding.ceremony.photoCreditUrl}" target="_blank" rel="noreferrer">Mister No / Wikimedia Commons</a> · <a href="${wedding.ceremony.photoLicenseUrl}" target="_blank" rel="noreferrer">CC BY 3.0</a></p><p class="photo-attribution">Informácie o kostole: <a href="${wedding.ceremony.website}" target="_blank" rel="noreferrer">Františkáni v Trnave</a></p></div></section>
 
     <section id="oslava" class="venue-section"><img class="venue-photo" src="${wedding.reception.heroPhoto.src}" alt="${escapeHTML(wedding.reception.heroPhoto.alt)}" loading="lazy"><div class="venue-copy"><p class="eyebrow">OSLAVA PO OBRADE · ZEMIANSKY DVOR</p><h2>Miesto oslavy</h2><p class="place-name">${escapeHTML(wedding.reception.name)}</p><p>${escapeHTML(wedding.reception.address)}</p><p class="venue-description">Po obrade sa stretneme na svadobnej oslave v Penzióne Zemiansky dvor.</p><div class="venue-actions"><a class="button button-outline" href="${wedding.reception.maps}" target="_blank" rel="noreferrer">${svg('pin')} Zobraziť na mape</a><a class="text-link" href="${wedding.reception.website}" target="_blank" rel="noreferrer">Viac o mieste ${svg('arrow')}</a></div></div><div class="venue-strip">${wedding.reception.photos.slice(1, 5).map(photo => `<img src="${photo.src}" alt="${escapeHTML(photo.alt)}" loading="lazy">`).join('')}</div><p class="photo-credit">Fotografie priestorov: <a href="${wedding.reception.website}" target="_blank" rel="noreferrer">La Reunion</a></p></section>
 
-    <section id="ubytovanie" class="content-section paper-section"><div class="section-inner"><p class="eyebrow">PRE POHODLIE NAŠICH HOSTÍ</p><h2>Ubytovanie</h2>${branch}<p class="section-lead">${escapeHTML(wedding.accommodationInfo)}</p><div class="detail-card">${svg('bed')}<div><h3>${wedding.accommodationName}</h3><p>${wedding.accommodationDates}</p><p>${wedding.accommodationAddress}</p></div></div><a class="button button-outline" href="${wedding.accommodationUrl}" target="_blank" rel="noreferrer">Informácie a rezervácia ${svg('arrow')}</a><p class="lodging-rsvp">Dajte nám, prosím, vedieť v RSVP, koľko osôb bude mať o ubytovanie záujem.</p></div></section>
+    <section id="ubytovanie" class="content-section paper-section"><div class="section-inner"><p class="eyebrow">PRE POHODLIE NAŠICH HOSTÍ</p><h2>Ubytovanie</h2><p class="section-lead">${escapeHTML(wedding.accommodationInfo)}</p><div class="detail-card">${svg('bed')}<div><h3>${wedding.accommodationName}</h3><p>${wedding.accommodationDates}</p><p>${wedding.accommodationAddress}</p></div></div><a class="button button-outline" href="${wedding.accommodationUrl}" target="_blank" rel="noreferrer">Informácie a rezervácia ${svg('arrow')}</a><p class="lodging-rsvp">Dajte nám, prosím, vedieť v RSVP, koľko osôb bude mať o ubytovanie záujem.</p></div></section>
 
-    <section id="doprava" class="content-section soft-section"><div class="section-inner"><p class="eyebrow">CESTA ZA NAMI</p><h2>Ako sa dostať</h2>${branch}<p class="section-lead">O 14:00 sa stretneme v Šúrovciach. Autobus odchádza o 14:15 do Trnavy; hostia môžu prísť aj priamo pred Kostol sv. Jakuba v Trnave. Po oslave autobus odvezie hostí späť do Šúroviec.</p><div class="travel-options"><article><h3>Autobus zo Šúroviec</h3><p>Odchod zo Šúroviec je o 14:15. Autobus vás odvezie na svadbu do Trnavy a po oslave späť do Šúroviec.</p></article><article><h3>Priamo ku kostolu</h3><p>Ak vám to viac vyhovuje, môžete prísť priamo pred ${escapeHTML(wedding.ceremony.name)} v Trnave.</p><a class="text-link" href="${wedding.ceremony.maps}" target="_blank" rel="noreferrer">Mapa ku kostolu ${svg('arrow')}</a></article></div></div></section>
+    <section id="doprava" class="content-section soft-section"><div class="section-inner"><p class="eyebrow">CESTA ZA NAMI</p><h2>Ako sa dostať</h2><p class="section-lead">O 14:00 sa stretneme v Šúrovciach. Autobus odchádza o 14:15 do Trnavy; hostia môžu prísť aj priamo pred Kostol sv. Jakuba v Trnave. Po oslave autobus odvezie hostí späť do Šúroviec.</p><div class="travel-options"><article><h3>Autobus zo Šúroviec</h3><p>Odchod zo Šúroviec je o 14:15. Autobus vás odvezie na svadbu do Trnavy a po oslave späť do Šúroviec.</p></article><article><h3>Priamo ku kostolu</h3><p>Ak vám to viac vyhovuje, môžete prísť priamo pred ${escapeHTML(wedding.ceremony.name)} v Trnave.</p><a class="text-link" href="${wedding.ceremony.maps}" target="_blank" rel="noreferrer">Mapa ku kostolu ${svg('arrow')}</a></article></div></div></section>
 
-    <section id="dress-code" class="content-section paper-section"><div class="section-inner"><p class="eyebrow">SLÁVNOSTNE A S POHODLÍM</p><h2>Dress code</h2>${branch}<p class="section-lead">Zvoľte si oblečenie, v ktorom sa budete cítiť slávnostne a pohodlne. Ďalšie odporúčania doplníme.</p></div></section>
+    <section id="dress-code" class="content-section paper-section"><div class="section-inner"><p class="eyebrow">SLÁVNOSTNE A S POHODLÍM</p><h2>Dress code</h2><p class="section-lead">Zvoľte si oblečenie, v ktorom sa budete cítiť slávnostne a pohodlne. Ďalšie odporúčania doplníme.</p></div></section>
 
-    <section id="darceky" class="content-section soft-section"><div class="section-inner"><p class="eyebrow">VAŠA PRÍTOMNOSŤ JE DAROM</p><h2>Darčeky</h2>${branch}<p class="section-lead">Najväčším darom pre nás bude, že tento deň oslávite spolu s nami. Ak by ste nás chceli obdarovať aj niečím navyše, veľmi nás poteší finančný príspevok do nášho spoločného začiatku.</p></div></section>
+    <section id="darceky" class="content-section soft-section"><div class="section-inner"><p class="eyebrow">VAŠA PRÍTOMNOSŤ JE DAROM</p><h2>Darčeky</h2><p class="section-lead">Najväčším darom pre nás bude, že tento deň oslávite spolu s nami. Ak by ste nás chceli obdarovať aj niečím navyše, veľmi nás poteší finančný príspevok do nášho spoločného začiatku.</p></div></section>
     <section id="zasnuby" class="content-section soft-section">
       <div class="section-inner">
         <p class="eyebrow">NAŠE ÁNO ZAČALO VO FLORENCII</p>
         <h2>Naše zásnuby</h2>
-        ${branch}
+        
         <p class="section-lead">
           <strong>4. apríla 2026 · Florencia</strong><br><br>
           Jeden z najkrajších momentov našej spoločnej cesty. Pozrite si, ako sa začala cesta k nášmu svadobnému dňu.
@@ -119,7 +119,7 @@ document.querySelector('#app').innerHTML = `
       </div>
     </section>
 
-    <section id="pribeh" class="content-section paper-section"><div class="section-inner"><p class="eyebrow">DVA PRÍBEHY, JEDNA SPOLOČNÁ CESTA</p><h2>Náš príbeh</h2>${branch}<p class="section-lead"><a class="text-link" href="${wedding.instagram}" target="_blank" rel="noreferrer">Sledujte naše cestovateľské dobrodružstvá na Instagrame ${svg('arrow')}</a></p></div></section>
+    <section id="pribeh" class="content-section paper-section"><div class="section-inner"><p class="eyebrow">DVA PRÍBEHY, JEDNA SPOLOČNÁ CESTA</p><h2>Náš príbeh</h2><p class="section-lead"><a class="text-link" href="${wedding.instagram}" target="_blank" rel="noreferrer">Sledujte naše cestovateľské dobrodružstvá na Instagrame ${svg('arrow')}</a></p></div></section>
 
         <section id="galeria" class="content-section soft-section">
       <div class="section-inner">
@@ -150,7 +150,7 @@ document.querySelector('#app').innerHTML = `
       </div>
     </section>
 
-    <section id="kontakt" class="content-section paper-section"><div class="section-inner"><p class="eyebrow">BUDEME RADI, KEĎ SA OZVETE</p><h2>Kontakt</h2>${branch}<p class="section-lead">Ak máte otázky, dajte nám vedieť. Kontaktné údaje doplníme.</p>${wedding.contactEmail ? `<a class="text-link" href="mailto:${escapeHTML(wedding.contactEmail)}">${escapeHTML(wedding.contactEmail)} ${svg('arrow')}</a>` : '<span class="contact-placeholder">Kontaktný e-mail doplníme.</span>'}</div></section>
+    <section id="kontakt" class="content-section paper-section"><div class="section-inner"><p class="eyebrow">BUDEME RADI, KEĎ SA OZVETE</p><h2>Kontakt</h2><p class="section-lead">Ak máte otázky, dajte nám vedieť. Kontaktné údaje doplníme.</p>${wedding.contactEmail ? `<a class="text-link" href="mailto:${escapeHTML(wedding.contactEmail)}">${escapeHTML(wedding.contactEmail)} ${svg('arrow')}</a>` : '<span class="contact-placeholder">Kontaktný e-mail doplníme.</span>'}</div></section>
 
     <footer class="site-footer paper-section"><div>${wreath}<p>Tešíme sa na vás<br>${escapeHTML(wedding.dateLabel)} v ${escapeHTML(wedding.locationShortLocative || 'Trnave')}</p><a class="text-link" href="#home">Späť na úvod ↑</a></div><small>VYTVORENÉ S LÁSKOU</small></footer>
   </main>
