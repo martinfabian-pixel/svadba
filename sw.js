@@ -1,7 +1,7 @@
-const CACHE = 'sm-wedding-v36';
+const CACHE = 'sm-wedding-v37';
 const BASE = new URL('.', self.registration.scope);
 const INDEX = new URL('index.html', BASE).pathname;
-const CORE = ['index.html', 'manifest.webmanifest', 'icons/icon.svg', 'assets/1-Fotka-1.jpg', 'assets/invite-wordmark.png', 'src/main.js', 'src/config.js', 'src/style.css'].map(path => new URL(path, BASE).pathname);
+const CORE = ['index.html', 'manifest.webmanifest', 'icons/icon.svg', 'assets/sm-monogram-exact.png', 'assets/invite-wordmark.png', 'src/main.js', 'src/config.js', 'src/style.css'].map(path => new URL(path, BASE).pathname);
 self.addEventListener('install', event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE)).then(() => self.skipWaiting())));
 self.addEventListener('activate', event => event.waitUntil(Promise.all([caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key)))), self.clients.claim()])));
 self.addEventListener('fetch', event => {
