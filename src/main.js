@@ -189,7 +189,7 @@ menuToggle.addEventListener('click', () => {
 });
 document.querySelector('#menu-close').addEventListener('click', closeMenu);menuPanel.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
 
-const revealTargets = document.querySelectorAll('.welcome-section, .countdown-section, .rsvp-section, .content-section, .place-section, .venue-section, .gallery-section, .gallery-item, .place-photo, .venue-photo, .venue-strip img', .rsvp-card);
+const revealTargets = document.querySelectorAll('.welcome-section, .countdown-section, .rsvp-section, .content-section, .place-section, .venue-section, .gallery-section, .gallery-item, .place-photo, .venue-photo, .venue-strip img, .rsvp-card');
 if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
