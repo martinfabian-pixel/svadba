@@ -83,19 +83,29 @@ button { color: inherit; }
 .menu-link b svg { width: 15px; }
 .menu-rsvp { width: 100%; }
 
-.invitation {
-  min-height: auto;
+  .invitation {
+  height: calc(100svh - 60px);
   position: relative;
-  display: grid;
-  place-items: start center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   overflow: hidden;
-  padding: 55px 20px 20px;
+  padding: 35px 20px 20px;
+  box-sizing: border-box;
 }
-.invitation-inner { width: min(100%, 420px); text-align: center; position: relative; display: flex; flex-direction: column; align-items: center; }
+.invitation-inner { wid.invitation-inner {
+  width: min(100%, 420px);
+  height: 100%;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .invitation-inner .wreath-mark {
   width: 168px;
   height: 168px;
-  margin-top: -0px;
+  margin-top: 0;
   margin-bottom: 9px;
 }
 .couple-names { margin: 0; width: min(100%, 420px); font-size: 0; line-height: 0; }
@@ -387,3 +397,23 @@ button { color: inherit; }
 .site-footer .wreath-mark { width: 108px; height: 72px; }
 @media (min-width: 760px) { .invitation-inner .wreath-mark { width: 240px; height: 160px; } }
 @media (max-width: 520px) { .invitation-inner .wreath-mark { width: 210px; height: 140px; } }
+@media (max-width: 600px) {
+  .invitation {
+    padding-top: 25px;
+    padding-bottom: 12px;
+  }
+
+  .invitation-inner .wreath-mark {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 4px;
+  }
+
+  .couple-wordmark {
+    width: 94%;
+  }
+
+  .invite-kicker {
+    margin-bottom: 10px;
+  }
+}
