@@ -266,9 +266,17 @@ function sendRsvp() {
     if (event.source !== frame.contentWindow || event.data?.type !== 'sm-wedding-rsvp') return;
     finish(event.data.ok === true);
   };
-  const timeout = setTimeout(() => finish(false), 25000);
-  window.addEventListener('message', onMessage);
-  form.submit();
+  let submitted = false;
+
+frame.addEventListener('load', () => {
+  if (submitted) finish(true);
+});
+
+const timeout = setTimeout(() => finish(false), 25000);
+window.addEventListener('message', onMessage);
+
+submitted = true;
+form.submit();
 }
 
 function bindStepFields() {
