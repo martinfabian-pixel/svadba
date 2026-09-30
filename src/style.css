@@ -356,3 +356,12 @@ button { color: inherit; }
 #home .wedding-rings { display: none !important; }
 
 #home::before { content: none !important; display: none !important; background: none !important; animation: none !important; }
+/* New S&M monogram proportions */
+.wreath-mark { width: 150px; height: 100px; }
+.header-logo { width: 48px; height: 32px; }
+.menu-logo { width: 90px; height: 60px; }
+.invitation-inner .wreath-mark { width: 220px; height: 147px; }
+.thanks-view .wreath-mark { width: 132px; height: 88px; }
+.site-footer .wreath-mark { width: 108px; height: 72px; }
+@media (min-width: 760px) { .invitation-inner .wreath-mark { width: 240px; height: 160px; } }
+@media (max-width: 520px) { .invitation-inner .wreath-mark { width: 210px; height: 140px; } }
