@@ -96,12 +96,12 @@ button { color: inherit; }
 .couple-wordmark {
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 0.88;
+  aspect-ratio: 3 / 0.94;
   background-color: var(--paper);
   background-image: var(--wordmark-image);
   background-repeat: no-repeat;
   background-size: 123.8% auto;
-  background-position: 61.4% 50%;
+  background-position: 61.4% 42.5%;
   background-blend-mode: multiply;
 }
 .invitation-inner .leaf-divider { margin: 13px auto 10px; width: 132px; height: 37px; }
