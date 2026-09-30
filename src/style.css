@@ -88,7 +88,7 @@ button { color: inherit; }
 .invitation-inner .wreath-mark {
   width: 168px;
   height: 168px;
-  margin-top: -70px;
+  margin-top: -130px;
   margin-bottom: 9px;
 }
 .couple-names { margin: 0; width: min(100%, 420px); font-size: 0; line-height: 0; }
