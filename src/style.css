@@ -623,7 +623,26 @@ button { color: inherit; }
       transform 1.15s cubic-bezier(.2,.7,.25,1) .25s,
       filter 1s ease .25s;
   }
+/* PLACE & VENUE TEXT REVEAL */
+@media (prefers-reduced-motion: no-preference) {
+  .place-copy.reveal-on-scroll,
+  .venue-copy.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(4px);
+    transition:
+      opacity 1s ease .2s,
+      transform 1.15s cubic-bezier(.2,.7,.25,1) .2s,
+      filter 1s ease .2s;
+  }
 
+  .place-copy.reveal-on-scroll.is-visible,
+  .venue-copy.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
   .rsvp-card.reveal-on-scroll.is-visible {
     opacity: 1;
     transform: translateY(0) scale(1);
