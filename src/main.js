@@ -37,6 +37,7 @@ const branch = `<svg class="leaf-divider" viewBox="0 0 220 62" aria-hidden="true
 </svg>`;
 const menu = [
   ['calendar', 'Harmonogram dňa', '#program'],
+  ['heart', 'Svadobné menu', '#svadobne-menu'],
   ['pin', 'Miesto obradu', '#miesto'],
   ['heart', 'Miesto oslavy', '#oslava'],
   ['bed', 'Ubytovanie', '#ubytovanie'],
@@ -92,7 +93,21 @@ document.querySelector('#app').innerHTML = `
     </section>
 
     <section id="program" class="content-section paper-section"><div class="section-inner"><p class="eyebrow">TEŠÍME SA NA KAŽDÝ OKAMIH</p><h2>Harmonogram dňa</h2><div class="schedule-list"><article><time>${escapeHTML(wedding.gatheringTime)}</time><span class="schedule-dot"></span><div><h3>Stretnutie v Šúrovciach</h3><p>${escapeHTML(wedding.gatheringPlace)}</p></div></article><article><time>${escapeHTML(wedding.ceremony.time)}</time><span class="schedule-dot"></span><div><h3>Svadobný obrad</h3><p>${escapeHTML(wedding.ceremony.name)} v Trnave</p></div></article><article><time>Po obrade</time><span class="schedule-dot"></span><div><h3>Svadobná oslava</h3><p>${escapeHTML(wedding.reception.name)} v Šúrovciach</p></div></article></div></div></section>
+<section id="svadobne-menu" class="content-section soft-section">
+  <div class="section-inner">
+    <p class="eyebrow">DOBRÉ JEDLO PATRÍ K DOBRÉMU DŇU</p>
+    <h2>Svadobné menu</h2>
 
+    <p class="section-lead">
+      Na detailoch nášho svadobného menu ešte pracujeme.<br>
+      Kompletné menu zverejníme čoskoro.
+    </p>
+
+    <p class="section-note">
+      Vegetariánske, bezlepkové a iné diétne požiadavky nám môžete uviesť pri potvrdení účasti.
+    </p>
+  </div>
+</section>
         <section id="miesto" class="place-section"><img class="place-photo" src="${wedding.ceremony.photo}" alt="${escapeHTML(wedding.ceremony.photoAlt)}" loading="lazy"><div class="place-copy"><p class="eyebrow">SVADOBNÝ OBRAD · ${escapeHTML(wedding.ceremony.time)}</p><h2>Miesto obradu</h2><p class="place-name">${escapeHTML(wedding.ceremony.name)} v ${escapeHTML(wedding.locationShortLocative || 'Trnave')}</p><p>${escapeHTML(wedding.ceremony.address).replace(', ', '<br>')}</p><a class="button button-outline" href="${wedding.ceremony.maps}" target="_blank" rel="noreferrer">${svg('pin')} Zobraziť na mape</a><p><a class="text-link" href="${wedding.ceremony.parkingMaps}" target="_blank" rel="noreferrer">Parkovanie pri kostole</a></p><p class="photo-attribution">Fotografia: <a href="${wedding.ceremony.photoCreditUrl}" target="_blank" rel="noreferrer">Mister No / Wikimedia Commons</a> · <a href="${wedding.ceremony.photoLicenseUrl}" target="_blank" rel="noreferrer">CC BY 3.0</a></p><p class="photo-attribution">Informácie o kostole: <a href="${wedding.ceremony.website}" target="_blank" rel="noreferrer">Františkáni v Trnave</a></p></div></section>
 
     <section id="oslava" class="venue-section"><img class="venue-photo" src="${wedding.reception.heroPhoto.src}" alt="${escapeHTML(wedding.reception.heroPhoto.alt)}" loading="lazy"><div class="venue-copy"><p class="eyebrow">OSLAVA PO OBRADE · ZEMIANSKY DVOR</p><h2>Miesto oslavy</h2><p class="place-name">${escapeHTML(wedding.reception.name)}</p><p>${escapeHTML(wedding.reception.address)}</p><p class="venue-description">Po obrade sa stretneme na svadobnej oslave v Penzióne Zemiansky dvor.</p><div class="venue-actions"><a class="button button-outline" href="${wedding.reception.maps}" target="_blank" rel="noreferrer">${svg('pin')} Zobraziť na mape</a><a class="text-link" href="${wedding.reception.website}" target="_blank" rel="noreferrer">Viac o mieste ${svg('arrow')}</a></div></div><div class="venue-strip">${wedding.reception.photos.slice(1, 5).map(photo => `<img src="${photo.src}" alt="${escapeHTML(photo.alt)}" loading="lazy">`).join('')}</div><p class="photo-credit">Fotografie priestorov: <a href="${wedding.reception.website}" target="_blank" rel="noreferrer">La Reunion</a></p></section>
