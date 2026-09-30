@@ -651,3 +651,25 @@ button { color: inherit; }
     filter: blur(0);
   }
 }
+/* CONTENT COMPONENT REVEAL */
+@media (prefers-reduced-motion: no-preference) {
+  .schedule-list.reveal-on-scroll,
+  .detail-card.reveal-on-scroll,
+  .travel-options.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(3px);
+    transition:
+      opacity .9s ease .18s,
+      transform 1.05s cubic-bezier(.2,.7,.25,1) .18s,
+      filter .9s ease .18s;
+  }
+
+  .schedule-list.reveal-on-scroll.is-visible,
+  .detail-card.reveal-on-scroll.is-visible,
+  .travel-options.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
