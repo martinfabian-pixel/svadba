@@ -612,3 +612,21 @@ button { color: inherit; }
     will-change: transform, opacity;
   }
 }
+/* RSVP CARD REVEAL */
+@media (prefers-reduced-motion: no-preference) {
+  .rsvp-card.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(28px) scale(.985);
+    filter: blur(4px);
+    transition:
+      opacity 1s ease .25s,
+      transform 1.15s cubic-bezier(.2,.7,.25,1) .25s,
+      filter 1s ease .25s;
+  }
+
+  .rsvp-card.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
