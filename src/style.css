@@ -596,3 +596,19 @@ button { color: inherit; }
     }
   }
 }
+/* CINEMATIC HERO SCROLL */
+@media (prefers-reduced-motion: no-preference) {
+  #home {
+    overflow: hidden;
+  }
+
+  #home .invitation-inner {
+    transform:
+      translateY(calc(var(--hero-scroll, 0) * -42px))
+      scale(calc(1 - var(--hero-scroll, 0) * .025));
+
+    opacity: calc(1 - var(--hero-scroll, 0) * .72);
+
+    will-change: transform, opacity;
+  }
+}
