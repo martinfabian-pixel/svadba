@@ -85,10 +85,25 @@ button { color: inherit; }
 
 .invitation { min-height: calc(100svh - 60px); position: relative; display: grid; place-items: center; overflow: hidden; padding: 26px 20px 34px; }
 .invitation-inner { width: min(100%, 420px); text-align: center; position: relative; display: flex; flex-direction: column; align-items: center; }
-.invitation-inner .wreath-mark { width: 168px; height: 168px; margin-bottom: 9px; }
+.invitation-inner .wreath-mark {
+  width: 168px;
+  height: 168px;
+  margin-top: -70px;
+  margin-bottom: 9px;
+}
 .couple-names { margin: 0; width: min(100%, 420px); font-size: 0; line-height: 0; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-.couple-wordmark { display: block; width: 100%; aspect-ratio: 3 / 1; background-color: var(--paper); background-image: var(--wordmark-image); background-repeat: no-repeat; background-size: 123.8% auto; background-position: 61.4% 42.5%; background-blend-mode: multiply; }
+.couple-wordmark {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 0.88;
+  background-color: var(--paper);
+  background-image: var(--wordmark-image);
+  background-repeat: no-repeat;
+  background-size: 123.8% auto;
+  background-position: 61.4% 42.5%;
+  background-blend-mode: multiply;
+}
 .invitation-inner .leaf-divider { margin: 13px auto 10px; width: 132px; height: 37px; }
 .invite-kicker { margin: 1px 0 16px; font: 500 12px/1.65 var(--serif); letter-spacing: .17em; text-transform: uppercase; }
 .wedding-date { margin: 0 0 8px; font: 500 20px var(--serif); letter-spacing: .22em; text-transform: uppercase; }
