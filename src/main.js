@@ -21,7 +21,7 @@ const icons = {
 const svg = (name, className = '') => `<svg class="${className}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round">${icons[name]}</svg>`;
 
 const assetFolder = new URL('../assets/', import.meta.url);
-const logoUrl = new URL('sm-monogram-new.svg', assetFolder).href;
+const logoUrl = new URL('1-Fotka-1.jpg', assetFolder).href;
 const wordmarkUrl = new URL('invite-wordmark.png', assetFolder).href;
 const wreath = `<img class="wreath-mark" src="${logoUrl}" alt="Monogram S&M" loading="lazy">`;
 
